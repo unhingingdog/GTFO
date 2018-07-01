@@ -17,5 +17,8 @@
     "request-promise": "^4.2.2",
     "restler": "^3.4.0",
     "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0"
   }
 }

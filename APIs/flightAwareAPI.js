@@ -1,5 +1,5 @@
-const password = require('../details.js').key
-const username = require('../details.js').username
+// const password = require('../details.js').key
+// const username = require('../details.js').username
 const axios = require('axios')
 
 const auth = {

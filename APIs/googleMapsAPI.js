@@ -1,4 +1,4 @@
-const key = require('../secret.js').googleKey
+const key = require('../details.js').googleKey
 
 const googleMapsClient = require('@google/maps').createClient({
   key: key,

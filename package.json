@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@google/maps": "^0.5.0",
-    "dotenv": "^6.0.0"
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3"
   }
 }

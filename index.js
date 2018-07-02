@@ -1,7 +1,7 @@
 const express = require('express')
-const queryAirportScheduled = require('./APIs/flightAwareAPI').queryAirportScheduled
-const queryFlightInfo = require('./APIs/flightAwareAPI').queryFlightInfo
-const geocode = require('./APIs/googleMapsAPI').getGeocode
+// const queryAirportScheduled = require('./APIs/flightAwareAPI').queryAirportScheduled
+// const queryFlightInfo = require('./APIs/flightAwareAPI').queryFlightInfo
+// const geocode = require('./APIs/googleMapsAPI').getGeocode
 
 const app = express()
 

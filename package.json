@@ -19,6 +19,7 @@
     "axios": "^0.18.0",
     "base-64": "^0.1.0",
     "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "node-rest-client-promise": "^3.1.0",
     "request": "^2.85.0",

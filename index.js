@@ -1,20 +1,20 @@
 const express = require('express')
-const queryAirportScheduled = require('./APIs/flightAwareAPI').queryAirportScheduled
-const queryFlightInfo = require('./APIs/flightAwareAPI').queryFlightInfo
-const geocode = require('./APIs/googleMapsAPI').getGeocode
+const getNextFlight = require('./controllers/flightDetailsController').getNextFlight
 
 const app = express()
+app.set("view engine", "ejs")
 
 app.get('/', (req, res) => {
-  res.send({ hi: 'there' })
+  res.render('index')
 })
 
-queryFlightInfo('JQ291', 15).then(flights => {
-  flights.map(flight => {
-    const departureTime = new Date(flight.filed_departuretime * 1000)
-    geocode(flight.origin).then(x => console.log(x))
+app.get('/flight/:flightNumber&:location', async (req, res) => {
+  const results = await getNextFlight(req)
+  res.render('flightDetails', {
+    flightDepartureLocation: results
   })
 })
+
 
 const PORT = (process.env.PORT || 5000)
 app.listen(PORT)

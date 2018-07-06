@@ -1,6 +1,6 @@
-const queryAirportScheduled = require('../APIs/flightAwareAPI').queryAirportScheduled
-const queryFlightInfo = require('../APIs/flightAwareAPI').queryFlightInfo
-const geocode = require('../APIs/googleMapsAPI').getGeocode
+const queryAirportScheduled = require('../publicAPIs/flightAwareAPI').queryAirportScheduled
+const queryFlightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
+const geocode = require('../publicAPIs/googleMapsAPI').getGeocode
 
 const getNextFlight = async req => {
   const { flightNumber, location }  = req.params

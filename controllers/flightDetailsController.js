@@ -2,8 +2,8 @@ const queryAirportScheduled = require('../publicAPIs/flightAwareAPI').queryAirpo
 const queryFlightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
 const geocode = require('../publicAPIs/googleMapsAPI').getGeocode
 
-const getNextFlight = async req => {
-  const { flightNumber, location }  = req.params
+const getNextFlight = async (req, res) => {
+  const { tailNumber }  = req.params
   const flights = await queryFlightInfo(flightNumber, 15)
   return flights
 }

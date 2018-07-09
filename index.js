@@ -1,14 +1,19 @@
 const express = require('express')
 const path = require('path')
 const getNextFlight = require('./controllers/flightDetailsController').getNextFlight
+const queryFlightInfo = require('./publicAPIs/flightAwareAPI').queryFlightInfo
 
 const app = express()
 
-app.get('api/flight/:flightNumber&:location', async (req, res) => {
-  const results = await getNextFlight(req)
-  res.render('flightDetails', {
-    flightDepartureLocation: results
-  })
+app.get('/api/get_flight/:tailNumber', async (req, res) => {
+  const { tailNumber }  = req.params
+  const flights = await queryFlightInfo(tailNumber, 15)
+  console.log(flights)
+  res.send(flights)
+})
+
+app.get('/api/current_flight', (req, res) => {
+  res.send(req.flight)
 })
 
 const PORT = (process.env.PORT || 5000)

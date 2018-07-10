@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Cookies from 'universal-cookie'
 import { submitFlight } from '../actions'
+const cookies = new Cookies()
 
 class FlightInput extends Component {
   constructor(props) {
@@ -10,8 +12,12 @@ class FlightInput extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ formContent: cookies.get('flight') || '' })
+  }
+
   render() {
-    console.log('in component', this.props.details)
+    console.log(this.state.formContent)
 
     return(
       <div>
@@ -19,7 +25,7 @@ class FlightInput extends Component {
           <label>
             <input
               type="text"
-              value={this.state.value}
+              value={this.state.formContent}
               onChange={e => this.setState({ formContent: e.target.value })}
             />
           </label>
@@ -33,6 +39,7 @@ class FlightInput extends Component {
     const { submitFlight } = this.props
     const { formContent } = this.state
     submitFlight(formContent)
+    cookies.set('flight', formContent, { path: '/' })
   }
 }
 

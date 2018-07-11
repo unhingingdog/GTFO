@@ -12,9 +12,5 @@ app.get('/api/get_flight/:tailNumber', async (req, res) => {
   res.send(flights)
 })
 
-app.get('/api/current_flight', (req, res) => {
-  res.send(req.flight)
-})
-
 const PORT = (process.env.PORT || 5000)
 app.listen(PORT)

@@ -6,6 +6,4 @@ describe('API', () => {
     const result = await flightInfo('jq291', 15, true)
     assert(result)
   })
-
-  
 })

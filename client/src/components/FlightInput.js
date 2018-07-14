@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie'
 import { submitFlight } from '../actions'
 const cookies = new Cookies()
 
-class FlightInput extends Component {
+export class FlightInput extends Component {
   constructor(props) {
     super(props)
     this.state = {

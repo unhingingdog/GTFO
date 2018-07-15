@@ -8,10 +8,6 @@ import FlightDetails from './FlightDetails'
 import * as actions from '../actions'
 
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchFlight()
-  }
-
   render() {
     return(
       <div>

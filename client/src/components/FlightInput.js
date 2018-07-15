@@ -2,23 +2,26 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
 import { submitFlight } from '../actions'
+import { CURRENT_LOCATION_NOT_ENABLED } from '../types'
+
 const cookies = new Cookies()
 
 export class FlightInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      formContent: ''
+      formContent: '',
+      geolocation: null,
+      time: Date.now()
     }
   }
 
   componentDidMount() {
     this.setState({ formContent: cookies.get('flight') || '' })
+    this.setGeolocation()
   }
 
   render() {
-    console.log(this.state.formContent)
-
     return(
       <div>
         <form onSubmit={this.submitFlight}>
@@ -30,6 +33,7 @@ export class FlightInput extends Component {
             />
           </label>
         </form>
+        <p>{this.state.geolocation}</p>
       </div>
     )
   }
@@ -40,6 +44,26 @@ export class FlightInput extends Component {
     const { formContent } = this.state
     submitFlight(formContent)
     cookies.set('flight', formContent, { path: '/' })
+  }
+
+  getGeolocation = () => {
+    return new Promise((resolve, reject) => {
+      window.navigator.geolocation.getCurrentPosition(resolve, reject)
+    })
+  }
+
+  setGeolocation = () => {
+    this.getGeolocation()
+      .then(result =>  {
+        const { latitude, longitude } = result.coords
+        this.setState({
+         geolocation: [latitude, longitude]
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({ geolocation: CURRENT_LOCATION_NOT_ENABLED })
+      })
   }
 }
 

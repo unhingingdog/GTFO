@@ -8,7 +8,10 @@ describe('Flight reducer', () => {
   beforeEach(() => {
     initial_state = {
       flight: '',
-      details: []
+      filedDepartureTime: null,
+      actualDepartureTime: null,
+      origin: '',
+      destination: ''
     }
   })
 
@@ -16,6 +19,12 @@ describe('Flight reducer', () => {
     expect(flightReducer(initial_state, {
       type: types.GET_FLIGHT_DETAILS,
       payload: flightInfo
-    })).toEqual({ flight: flightInfo.ident, details: flightInfo})
+    })).toEqual({
+      flight: flightInfo.ident,
+      filedDepartureTime: flightInfo.filed_departuretime,
+      actualDepartureTime: flightInfo.actualdeparturetime,
+      origin: flightInfo.origin,
+      destination: flightInfo.destination
+    })
   })
 })

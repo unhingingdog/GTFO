@@ -15,8 +15,13 @@ const getGeocode = async airport => {
       console.log(err)
       return err
     });
-  }
+}
+
+const getDistance = (origin, destination) => {
+  googleMapsClient.directions({ origin, destination }, r => console.log(r))
+}
 
 module.exports = {
-  getGeocode: getGeocode
+  getGeocode: getGeocode,
+  getDistance: getDistance
 }

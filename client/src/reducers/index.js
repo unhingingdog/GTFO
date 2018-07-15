@@ -4,5 +4,5 @@ import geolocationReducer from './geolocationReducer'
 
 export default combineReducers({
   flight: flightReducer,
-  locations: geolocationReducer
+  location: geolocationReducer
 })

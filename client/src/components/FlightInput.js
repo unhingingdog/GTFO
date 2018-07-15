@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
-import { submitFlight } from '../actions'
+import { submitFlight, setCurrentLocation } from '../actions'
 import { CURRENT_LOCATION_NOT_ENABLED } from '../types'
 
 const cookies = new Cookies()
@@ -11,8 +11,6 @@ export class FlightInput extends Component {
     super(props)
     this.state = {
       formContent: '',
-      geolocation: null,
-      time: Date.now()
     }
   }
 
@@ -41,8 +39,9 @@ export class FlightInput extends Component {
   submitFlight = e => {
     e.preventDefault()
     const { submitFlight } = this.props
+    const { currentLatitude, currentLongitude } = this.props
     const { formContent } = this.state
-    submitFlight(formContent)
+    submitFlight(formContent, currentLatitude, currentLongitude)
     cookies.set('flight', formContent, { path: '/' })
   }
 
@@ -53,16 +52,15 @@ export class FlightInput extends Component {
   }
 
   setGeolocation = () => {
+    const { setCurrentLocation } = this.props
+
     this.getGeolocation()
-      .then(result =>  {
-        const { latitude, longitude } = result.coords
-        this.setState({
-         geolocation: [latitude, longitude]
-        })
+      .then(result => {
+        setCurrentLocation(result)
       })
       .catch(err => {
         console.log(err)
-        this.setState({ geolocation: CURRENT_LOCATION_NOT_ENABLED })
+        setCurrentLocation(CURRENT_LOCATION_NOT_ENABLED)
       })
   }
 }
@@ -70,8 +68,12 @@ export class FlightInput extends Component {
 const mapStateToProps = state => {
   return {
     flight: state.flight.flight,
-    details: state.flight.details
+    currentLatitude: state.location.currentLatitude,
+    currentLongitude: state.location.currentLongitude
   }
 }
 
-export default connect(mapStateToProps, { submitFlight })(FlightInput)
+export default connect(mapStateToProps, {
+  submitFlight,
+  setCurrentLocation
+})(FlightInput)

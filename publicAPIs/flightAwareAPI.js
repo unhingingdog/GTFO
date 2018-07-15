@@ -28,7 +28,11 @@ const queryFlightInfo = async (tailNumber, resultCount, test = false) => {
       auth
     }
     const result = await axios(options)
-    return result.data.FlightInfoExResult.flights
+    if (result.data.FlightInfoExResult.flights) {
+      return result.data.FlightInfoExResult.flights
+    } else {
+      return 'could_not_find_flight'
+    }
 }
 
 const queryAirportScheduled = async (airport, resultCount, filter) => {

@@ -56,6 +56,7 @@ export class FlightInput extends Component {
 
     this.getGeolocation()
       .then(result => {
+        console.log(result)
         setCurrentLocation(result)
       })
       .catch(err => {

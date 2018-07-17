@@ -9,7 +9,7 @@ const getGeocode = async airport => {
   return await googleMapsClient.geocode({address: `${airport} airport`})
     .asPromise()
     .then((response) => {
-      return response.json.results
+      return response.json.results[0].formatted_address
     })
     .catch((err) => {
       console.log(err)
@@ -17,11 +17,59 @@ const getGeocode = async airport => {
     });
 }
 
-const getDistance = (origin, destination) => {
-  googleMapsClient.directions({ origin, destination }, r => console.log(r))
+const getReverseGeocode = async coordinates => {
+  return await googleMapsClient.reverseGeocode(
+    { latlng:{ lat: coordinates[0], lng: coordinates[1] }
+  })
+    .asPromise()
+    .then((response) => {
+      return response.json.results[0].formatted_address
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    });
+}
+
+const getDistance = async (origins, destinations) => {
+  return await googleMapsClient.distanceMatrix(
+    {
+      origins,
+      destinations,
+    }
+  )
+    .asPromise()
+    .then(response => {
+      return response.json.rows[0].elements
+      // return response.json.rows[0].elements[0].distance.value
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    });
+}
+
+const getDirections = async (origin, destination) => {
+  return await googleMapsClient.directions(
+    {
+      origin,
+      destination
+    }
+  )
+    .asPromise()
+    .then(response => {
+      return response.json.routes
+      // return response.json.rows[0].elements[0].distance.value
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    });
 }
 
 module.exports = {
   getGeocode: getGeocode,
-  getDistance: getDistance
+  getDistance: getDistance,
+  getReverseGeocode: getReverseGeocode,
+  getDirections: getDirections
 }

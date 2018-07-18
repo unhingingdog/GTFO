@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const airportDistanceInfo = require('./utils/flightDetailUtils').airportDistanceInfo
+const getNextFlight = require('./utils/flightDetailUtils').getNextFlight
 
 const app = express()
 
@@ -8,14 +9,11 @@ app.get('/api/get_flight/:tailNumber&:currentLatitude&:currentLongitude',
 async (req, res) => {
   const { tailNumber, currentLatitude, currentLongitude }  = req.params
 
-  const flights = await queryFlightInfo(tailNumber, 15)
-  const currentTime = Date.now() / 1000
-  const upcomingFlights = flights
-    .filter(flight => flight.filed_departuretime > currentTime)
-    filter out closest to airport and return duration details
+  // const distance = await airportDistanceInfo('wgtn', currentLatitude, currentLongitude)
+  // console.log(distance[0].distance.value)
 
-  const distance = await airportDistanceInfo('wgtn', currentLatitude, currentLongitude)
-  console.log(distance)
+  const airport = await getNextFlight('AA7364', currentLatitude, currentLongitude)
+  console.log(airport)
 
   // const airportLocation = await geocode('WGTN')
   // // console.log('geocode ', airportLocation)

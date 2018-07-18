@@ -59,7 +59,6 @@ const getDirections = async (origin, destination) => {
     .asPromise()
     .then(response => {
       return response.json.routes
-      // return response.json.rows[0].elements[0].distance.value
     })
     .catch((err) => {
       console.log(err)

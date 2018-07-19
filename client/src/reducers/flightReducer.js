@@ -12,6 +12,8 @@ const default_state = {
   destination: ''
 }
 
+//split up flight data into state
+
 export default (state = default_state, action) => {
   switch(action.type) {
     case GET_FLIGHT_DETAILS:

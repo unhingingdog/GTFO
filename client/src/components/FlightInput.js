@@ -31,7 +31,6 @@ export class FlightInput extends Component {
             />
           </label>
         </form>
-        <p>{this.state.geolocation}</p>
       </div>
     )
   }

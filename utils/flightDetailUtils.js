@@ -13,15 +13,13 @@ const airportDistanceInfo = async (airportCode, currentLatitude, currentLongitud
   .catch(error => console.log(error))
 }
 
-const getNextFlight = async (
+const combineTravelandFlightData = async (
   tailNumber,
   currentLatitude,
   currentLongitude,
-  flightDataSource = queryFlightInfo
+  flightDataSource
 ) => {
-
   const flights = await flightDataSource(tailNumber, 15)
-
   const upcomingFlights = await flights
     .filter(flight => (flight.filed_departuretime * 1000) > Date.now())
 
@@ -29,21 +27,50 @@ const getNextFlight = async (
     return airportDistanceInfo(flight.origin, currentLatitude, currentLongitude)
   }))
 
-  let closestFlightDetails = { distance: { value: Infinity } }
+  return upcomingFlights.map((flight, i) =>
+     combinedTravelData = { ...flight, ...upcomingFlightTimes[i][0] }
+  )
+}
 
-  const flightDetailsAndDistance = upcomingFlights.map((flight, i) => {
-    const combinedTravelData = { ...flight, ...upcomingFlightTimes[i][0]}
-    const { value: distanceToAirport } = combinedTravelData.distance
+const getNearestFlights = flights => {
+  let minimumDistance = Infinity
+  const output = []
 
-    if (distanceToAirport < closestFlightDetails.distance.value ||
-    !closestFlightDetails) closestFlightDetails = combinedTravelData
-
-    return combinedTravelData
+  flights.forEach(flight => {
+    const { value: distanceToAirport } = flight.distance
+    if (distanceToAirport < minimumDistance) {
+      //account for large airport or user is close to airport
+      minimumDistance = distanceToAirport * 1.5
+    }
   })
-  return closestFlightDetails
+
+  flights.forEach(flight => {
+    const { value: distanceToAirport } = flight.distance
+    if (distanceToAirport < minimumDistance) output.push(flight)
+  })
+
+  return output
+}
+
+const getFlights = async (
+  tailNumber,
+  currentLatitude,
+  currentLongitude,
+  flightDataSource = queryFlightInfo
+) => {
+  return getNearestFlights(
+    await combineTravelandFlightData(
+      tailNumber,
+      currentLatitude,
+      currentLongitude,
+      flightDataSource
+    )
+  )
 }
 
 module.exports = {
   airportDistanceInfo: airportDistanceInfo,
-  getNextFlight: getNextFlight
+  combineTravelandFlightData: combineTravelandFlightData,
+  getNearestFlights, getNearestFlights,
+  getFlights: getFlights
 }

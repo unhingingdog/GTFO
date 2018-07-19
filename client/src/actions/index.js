@@ -23,14 +23,9 @@ export const submitFlight = (tailNumber, latitude, longitude) => async dispatch 
     `/api/get_flight/${tailNumber}&${latitude}&${longitude}`
   )
 
-
-
   if (flightsData === types.COULD_NOT_FIND_FLIGHT) {
     dispatch({ type: types.COULD_NOT_FIND_FLIGHT })
   }
-
-  // const destinationData = await geocode API (flightsData.origin) (maybe client side)
-  // dispatch({ type: types.SET_DESTINATION_LOCATION, payload: destinationData})
-
+  console.log(flightsData.data)
   dispatch({ type: types.GET_FLIGHT_DETAILS, payload: flightsData.data })
 }

@@ -12,7 +12,6 @@ const default_state = {
 }
 
 export default (state = default_state, action) => {
-  console.log(action.payload)
   switch(action.type) {
     case SET_CURRENT_LOCATION:
       return {

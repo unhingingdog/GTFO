@@ -13,9 +13,14 @@ const airportDistanceInfo = async (airportCode, currentLatitude, currentLongitud
   .catch(error => console.log(error))
 }
 
-const getNextFlight = async (tailNumber, currentLatitude, currentLongitude) => {
-  let lowest
-  const flights = await queryFlightInfo(tailNumber, 15)
+const getNextFlight = async (
+  tailNumber,
+  currentLatitude,
+  currentLongitude,
+  flightDataSource = queryFlightInfo
+) => {
+
+  const flights = await flightDataSource(tailNumber, 15)
 
   const upcomingFlights = await flights
     .filter(flight => (flight.filed_departuretime * 1000) > Date.now())
@@ -23,12 +28,19 @@ const getNextFlight = async (tailNumber, currentLatitude, currentLongitude) => {
   const upcomingFlightTimes = await Promise.all(upcomingFlights.map(flight => {
     return airportDistanceInfo(flight.origin, currentLatitude, currentLongitude)
   }))
-  .then(airportDistanceDetails => {
-    const distance = airportDistanceDetails[0][0].distance.value
-    if (distance < lowest || !lowest) lowest = distance
-  })
 
-  return lowest
+  let closestFlightDetails = { distance: { value: Infinity } }
+
+  const flightDetailsAndDistance = upcomingFlights.map((flight, i) => {
+    const combinedTravelData = { ...flight, ...upcomingFlightTimes[i][0]}
+    const { value: distanceToAirport } = combinedTravelData.distance
+
+    if (distanceToAirport < closestFlightDetails.distance.value ||
+    !closestFlightDetails) closestFlightDetails = combinedTravelData
+
+    return combinedTravelData
+  })
+  return closestFlightDetails
 }
 
 module.exports = {

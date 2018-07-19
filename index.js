@@ -13,7 +13,7 @@ async (req, res) => {
   // console.log(distance[0].distance.value)
 
   const airport = await getNextFlight('AA7364', currentLatitude, currentLongitude)
-  console.log(airport)
+  console.log('airport: ', airport)
 
   // const airportLocation = await geocode('WGTN')
   // // console.log('geocode ', airportLocation)

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
-import { submitFlight, setCurrentLocation } from '../actions'
+import {
+  submitFlight,
+  setCurrentLocation,
+  startLoading,
+  stopLoading
+} from '../actions'
 import { CURRENT_LOCATION_NOT_ENABLED } from '../types'
 
 const cookies = new Cookies()
@@ -30,6 +35,7 @@ export class FlightInput extends Component {
               onChange={e => this.setState({ formContent: e.target.value })}
             />
           </label>
+          <p>{this.props.loadingMessage}</p>
         </form>
       </div>
     )
@@ -52,15 +58,19 @@ export class FlightInput extends Component {
   }
 
   setGeolocation = () => {
-    const { setCurrentLocation } = this.props
+    const { setCurrentLocation, startLoading, stopLoading } = this.props
+    startLoading('Where you at?')
+
     this.getGeolocation()
       .then(result => {
         console.log(result)
         setCurrentLocation(result)
+        stopLoading()
       })
       .catch(err => {
         console.log(err)
         setCurrentLocation(CURRENT_LOCATION_NOT_ENABLED)
+        stopLoading()
       })
   }
 }
@@ -69,11 +79,15 @@ const mapStateToProps = state => {
   return {
     flight: state.flight.flight,
     currentLatitude: state.location.currentLatitude,
-    currentLongitude: state.location.currentLongitude
+    currentLongitude: state.location.currentLongitude,
+    currentlyLoading: state.loading.currentlyLoading,
+    loadingMessage: state.loading.message
   }
 }
 
 export default connect(mapStateToProps, {
   submitFlight,
-  setCurrentLocation
+  setCurrentLocation,
+  startLoading,
+  stopLoading
 })(FlightInput)

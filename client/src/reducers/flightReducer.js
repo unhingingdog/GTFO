@@ -9,28 +9,28 @@ const default_state = {
   filedDepartureTime: null,
   actualDepartureTime: null,
   origin: '',
-  destination: ''
+  destination: '',
+  nextFlightDetails: null
 }
-
-//split up flight data into state
 
 export default (state = default_state, action) => {
   switch(action.type) {
     case GET_FLIGHT_DETAILS:
+      const upcomingFlight = action.payload[0]
+      const nextFlight = action[1] ? action[1] : null
       return {
-        flight: action.payload.ident,
-        filedDepartureTime: action.payload.filed_departuretime,
-        actualDepartureTime: action.payload.actualdeparturetime,
-        origin: action.payload.origin,
-        destination: action.payload.destination
+        flight: upcomingFlight.ident,
+        filedDepartureTime: upcomingFlight.filed_departuretime,
+        actualDepartureTime: upcomingFlight.actualdeparturetime,
+        origin: upcomingFlight.origin,
+        destination: upcomingFlight.destination,
+        nextFlightDetails: nextFlight
       }
     case UPDATE_FLIGHT_DETAILS:
       return {
         ...state,
         filedDepartureTime: action.payload.filed_departuretime,
         actualDepartureTime: action.payload.actualdeparturetime,
-        origin: action.payload.origin,
-        destination: action.payload.destination
       }
     case COULD_NOT_FIND_FLIGHT:
       return {

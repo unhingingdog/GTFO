@@ -11,7 +11,8 @@ describe('Flight reducer', () => {
       filedDepartureTime: null,
       actualDepartureTime: null,
       origin: '',
-      destination: ''
+      destination: '',
+      nextFlightDetails: {}
     }
   })
 
@@ -24,7 +25,8 @@ describe('Flight reducer', () => {
       filedDepartureTime: flightInfo.filed_departuretime,
       actualDepartureTime: flightInfo.actualdeparturetime,
       origin: flightInfo.origin,
-      destination: flightInfo.destination
+      destination: flightInfo.destination,
+      nextFlightDetails: {}
     })
   })
 
@@ -37,7 +39,8 @@ describe('Flight reducer', () => {
       filedDepartureTime: flightInfo.filed_departuretime,
       actualDepartureTime: flightInfo.actualdeparturetime,
       origin: flightInfo.origin,
-      destination: flightInfo.destination
+      destination: flightInfo.destination,
+      nextFlightDetails: {}
     })
   })
 

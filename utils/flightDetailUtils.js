@@ -1,15 +1,17 @@
 const queryFlightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
-const geocode = require('../publicAPIs/googleMapsAPI').getGeocode
-const getDistance = require('../publicAPIs/googleMapsAPI').getDistance
-const reverseGeocode = require('../publicAPIs/googleMapsAPI').getReverseGeocode
-const getDirections = require('../publicAPIs/googleMapsAPI').getDirections
+const googleMapsAPI = require('../publicAPIs/googleMapsAPI')
 
-const airportDistanceInfo = async (airportCode, currentLatitude, currentLongitude) => {
+const airportDistanceInfo = async (
+  airportCode,
+  currentLatitude,
+  currentLongitude,
+  navigationProvider
+) => {
   return Promise.all([
-    geocode(airportCode),
-    reverseGeocode([currentLatitude, currentLongitude])
+    navigationProvider.getGeocode(airportCode),
+    navigationProvider.getReverseGeocode([currentLatitude, currentLongitude])
   ])
-  .then(results => getDistance(results[0], results[1]))
+  .then(results => navigationProvider.getDistance(results[0], results[1]))
   .catch(error => console.log(error))
 }
 
@@ -17,14 +19,20 @@ const combineTravelandFlightData = async (
   tailNumber,
   currentLatitude,
   currentLongitude,
-  flightDataSource
+  flightDataSource,
+  navigationProvider
 ) => {
   const flights = await flightDataSource(tailNumber, 15)
   const upcomingFlights = await flights
     .filter(flight => (flight.filed_departuretime * 1000) > Date.now())
 
   const upcomingFlightTimes = await Promise.all(upcomingFlights.map(flight => {
-    return airportDistanceInfo(flight.origin, currentLatitude, currentLongitude)
+    return airportDistanceInfo(
+      flight.origin,
+      currentLatitude,
+      currentLongitude,
+      navigationProvider
+    )
   }))
 
   return upcomingFlights.map((flight, i) =>
@@ -56,21 +64,20 @@ const getFlights = async (
   tailNumber,
   currentLatitude,
   currentLongitude,
-  flightDataSource = queryFlightInfo
+  flightDataSource = queryFlightInfo,
+  navigationProvider = googleMapsAPI
 ) => {
   return getNearestFlights(
     await combineTravelandFlightData(
       tailNumber,
       currentLatitude,
       currentLongitude,
-      flightDataSource
+      flightDataSource,
+      navigationProvider
     )
   )
 }
 
 module.exports = {
-  airportDistanceInfo: airportDistanceInfo,
-  combineTravelandFlightData: combineTravelandFlightData,
-  getNearestFlights, getNearestFlights,
   getFlights: getFlights
 }

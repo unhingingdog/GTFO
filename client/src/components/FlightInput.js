@@ -42,6 +42,7 @@ export class FlightInput extends Component {
     const { formContent } = this.state
     submitFlight(formContent, currentLatitude, currentLongitude)
     cookies.set('flight', formContent, { path: '/' })
+    console.log(this.props.flight)
   }
 
   getGeolocation = () => {
@@ -52,7 +53,6 @@ export class FlightInput extends Component {
 
   setGeolocation = () => {
     const { setCurrentLocation } = this.props
-
     this.getGeolocation()
       .then(result => {
         console.log(result)

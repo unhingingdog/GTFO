@@ -7,7 +7,7 @@ const app = express()
 app.get('/api/get_flight/:tailNumber&:currentLatitude&:currentLongitude',
 async (req, res) => {
   const { tailNumber, currentLatitude, currentLongitude }  = req.params
-  res.send(await getFlights('AA7364', currentLatitude, currentLongitude))
+  res.send(await getFlights('NH7951', currentLatitude, currentLongitude))
 })
 
 const PORT = (process.env.PORT || 5000)

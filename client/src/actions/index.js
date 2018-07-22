@@ -11,13 +11,6 @@ export const setCurrentLocation = locationData => {
   }}
 }
 
-export const setDestinationLocation = locationData => {
-  return { type: types.SET_DESTINATION_LOCATION,  payload: {
-    currentLongitude: locationData.coords.longitude,
-    currentLatitude: locationData.coords.latitude
-  }}
-}
-
 export const submitFlight = (tailNumber, latitude, longitude) => async dispatch => {
   const flightsData = await axios.get(
     `/api/get_flight/${tailNumber}&${latitude}&${longitude}`

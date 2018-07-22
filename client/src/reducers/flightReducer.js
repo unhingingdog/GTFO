@@ -24,7 +24,9 @@ export default (state = default_state, action) => {
         actualDepartureTime: upcomingFlight.actualdeparturetime,
         origin: upcomingFlight.origin,
         destination: upcomingFlight.destination,
-        nextFlightDetails: nextFlight
+        nextFlightDetails: nextFlight,
+        distance: upcomingFlight.distance,
+        duration: upcomingFlight.duration
       }
     case UPDATE_FLIGHT_DETAILS:
       return {

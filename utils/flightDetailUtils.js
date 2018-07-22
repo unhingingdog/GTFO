@@ -1,5 +1,34 @@
 const queryFlightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
 const googleMapsAPI = require('../publicAPIs/googleMapsAPI')
+const airlineArrivalTimes = require('./flightAndAirportInfo').airportArrivalTimes
+const airportLocations = require('./flightAndAirportInfo').airportLocations
+
+const isFlightInternational = (origin, destination) => {
+  if (airportLocations.origin && airportLocations.destination) {
+    return airportLocations.origin === airportLocations.destination
+  }
+  throw 'Could not find airport country.'
+}
+
+
+const findAirlineArrivalTimes = (tailNumber, international) => {
+  const { tailNumber: flight } = airportArrivalTimes
+  if (flight && international) return flight.international
+  if (flight) return flight.domestic
+  throw 'Could not find airport arrival information.'
+}
+
+
+const addAirlineArrivalTimes = flights => {
+  return flights.map(flight => {
+    const arrivalTimes = findAirlineArrivalTimes(
+      flight.ident
+      isFlightInternational(flight.origin, flight.destination)
+    )
+    return { ...flight, ...arrivalTimes }
+  })
+}
+
 
 const airportDistanceInfo = async (
   airportCode,
@@ -14,6 +43,7 @@ const airportDistanceInfo = async (
   .then(results => navigationProvider.getDistance(results[0], results[1]))
   .catch(error => console.log(error))
 }
+
 
 const combineTravelandFlightData = async (
   tailNumber,
@@ -34,11 +64,11 @@ const combineTravelandFlightData = async (
       navigationProvider
     )
   }))
-
   return upcomingFlights.map((flight, i) =>
      combinedTravelData = { ...flight, ...upcomingFlightTimes[i][0] }
   )
 }
+
 
 const getNearestFlights = flights => {
   let minimumDistance = Infinity
@@ -51,7 +81,6 @@ const getNearestFlights = flights => {
       minimumDistance = distanceToAirport * 1.5
     }
   })
-
   flights.forEach(flight => {
     const { value: distanceToAirport } = flight.distance
     if (distanceToAirport < minimumDistance) output.push(flight)
@@ -60,6 +89,7 @@ const getNearestFlights = flights => {
   return output
 }
 
+
 const getFlights = async (
   tailNumber,
   currentLatitude,
@@ -67,16 +97,20 @@ const getFlights = async (
   flightDataSource = queryFlightInfo,
   navigationProvider = googleMapsAPI
 ) => {
-  return getNearestFlights(
-    await combineTravelandFlightData(
-      tailNumber,
-      currentLatitude,
-      currentLongitude,
-      flightDataSource,
-      navigationProvider
+  return
+  addAirlineArrivalTimes(
+    getNearestFlights(
+      await combineTravelandFlightData(
+        tailNumber,
+        currentLatitude,
+        currentLongitude,
+        flightDataSource,
+        navigationProvider
+      )
     )
   )
 }
+
 
 module.exports = {
   getFlights: getFlights,

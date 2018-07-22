@@ -36,6 +36,8 @@ export class FlightInput extends Component {
             />
           </label>
           <p>{this.props.loadingMessage}</p>
+          <p>{this.props.origin} to {this.props.destination}</p>
+          <p>{this.props.loadingMessage}</p>
         </form>
       </div>
     )
@@ -48,7 +50,6 @@ export class FlightInput extends Component {
     const { formContent } = this.state
     submitFlight(formContent, currentLatitude, currentLongitude)
     cookies.set('flight', formContent, { path: '/' })
-    console.log(this.props.flight)
   }
 
   getGeolocation = () => {
@@ -78,6 +79,8 @@ export class FlightInput extends Component {
 const mapStateToProps = state => {
   return {
     flight: state.flight.flight,
+    origin: state.flight.origin,
+    destination: state.flight.destination,
     currentLatitude: state.location.currentLatitude,
     currentLongitude: state.location.currentLongitude,
     currentlyLoading: state.loading.currentlyLoading,

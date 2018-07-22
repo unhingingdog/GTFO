@@ -1,7 +1,7 @@
 const password = require('../details.js').key
 const username = require('../details.js').username
 const axios = require('axios')
-const testFlightInfo  = require('../testData/flightAwareTestData').flightInfo
+const testFlightInfo  = require('../testData/externalAPITestData').flightInfo
 
 const auth = {
   username: username,

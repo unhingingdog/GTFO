@@ -1,6 +1,6 @@
 import flightReducer from '../src/reducers/flightReducer'
 import * as types from '../src/types'
-import { flightInfo } from '../../testData/flightAwareTestData'
+import { flightInfo } from '../../testData/externalAPITestData'
 
 describe('Flight reducer', () => {
   let initial_state

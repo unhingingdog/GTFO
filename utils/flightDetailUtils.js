@@ -79,5 +79,6 @@ const getFlights = async (
 }
 
 module.exports = {
-  getFlights: getFlights
+  getFlights: getFlights,
+  getNearestFlights: getNearestFlights
 }

@@ -22,3 +22,7 @@ export const submitFlight = (tailNumber, latitude, longitude) => async dispatch 
   console.log(flightsData.data)
   dispatch({ type: types.GET_FLIGHT_DETAILS, payload: flightsData.data })
 }
+
+export const startLoading = payload => { types.START_LOADING, message }
+
+export const stopLoading = () => { types.STOP_LOADING }

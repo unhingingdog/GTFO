@@ -1,28 +1,32 @@
 const queryFlightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
 const googleMapsAPI = require('../publicAPIs/googleMapsAPI')
-const airlineArrivalTimes = require('./flightAndAirportInfo').airportArrivalTimes
+const airlineArrivalTimes = require('./flightAndAirportInfo').airlineArrivalTimes
 const airportLocations = require('./flightAndAirportInfo').airportLocations
 
 const isFlightInternational = (origin, destination) => {
-  if (airportLocations.origin && airportLocations.destination) {
-    return airportLocations.origin === airportLocations.destination
+  if (!(airportLocations[origin] && airportLocations[destination]))
+    return { airlineTimes: 'NONE' }
+
+  if (airportLocations[origin] && airportLocations[destination]) {
+    return !(airportLocations[origin] === airportLocations[destination])
   }
-  throw 'Could not find airport country.'
 }
 
-
 const findAirlineArrivalTimes = (tailNumber, international) => {
-  const { tailNumber: flight } = airportArrivalTimes
-  if (flight && international) return flight.international
-  if (flight) return flight.domestic
-  throw 'Could not find airport arrival information.'
+  const airline = tailNumber.match(/[0-9](?=[a-z])[a-z]*|[a-z]*/i)[0].toUpperCase()
+  if (airlineArrivalTimes[airline] && international)
+    return airlineArrivalTimes[airline].international
+
+  if (airlineArrivalTimes[airline]) return airlineArrivalTimes[airline].domestic
+
+  return { airlineTimes: 'NONE' }
 }
 
 
 const addAirlineArrivalTimes = flights => {
   return flights.map(flight => {
     const arrivalTimes = findAirlineArrivalTimes(
-      flight.ident
+      flight.ident,
       isFlightInternational(flight.origin, flight.destination)
     )
     return { ...flight, ...arrivalTimes }
@@ -97,8 +101,7 @@ const getFlights = async (
   flightDataSource = queryFlightInfo,
   navigationProvider = googleMapsAPI
 ) => {
-  return
-  addAirlineArrivalTimes(
+  return addAirlineArrivalTimes(
     getNearestFlights(
       await combineTravelandFlightData(
         tailNumber,

@@ -1,6 +1,6 @@
 exports.flightInfo = [{
     faFlightID: 'JST291-1531203000-schedule-0000',
-    ident: 'XX420',
+    ident: 'JQ420',
     aircrafttype: 'A320',
     filed_ete: '00:33:00',
     filed_time: 1531203000,

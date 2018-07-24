@@ -4,6 +4,8 @@ const expect = require('chai').expect
 const getFlights = require('../utils/flightDetailUtils').getFlights
 const getNearestFlights = require('../utils/flightDetailUtils').getNearestFlights
 const flightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
+const airlineArrivalTimes = require('../utils/flightAndAirportInfo').airlineArrivalTimes
+const airportLocations = require('../utils/flightAndAirportInfo').airportLocations
 
 const mockData = require('../testData/externalAPITestData')
 
@@ -19,7 +21,7 @@ describe('getFlights', async () => {
   let result
   beforeEach(async () => {
     result = await getFlights(
-      'XX420',
+      'JQ420',
       36.1699,
       -115.1398,
       mockData.flightInfoAsync,
@@ -35,13 +37,15 @@ describe('getFlights', async () => {
     assert.lengthOf(result, 1)
   })
 
-  it('Should return combined navigation and flight data', () => {
+  it('Should return combined data', () => {
     const flightObject = result[0]
     const { origin, filed_departuretime, ident } = mockData.flightInfo[0]
-    const { duration, distance }  = mockData.navigationInfo[0]
+    const { duration, distance } = mockData.navigationInfo[0]
+    const { arriveAtGate } = airlineArrivalTimes.JQ.domestic
 
     assert.equal(flightObject.ident, ident)
     assert.equal(flightObject.origin, origin)
+    assert.equal(flightObject.arriveAtGate, arriveAtGate)
     assert(flightObject.filed_departuretime)
     assert.deepEqual(flightObject.duration, duration)
     assert.deepEqual(flightObject.distance, distance)

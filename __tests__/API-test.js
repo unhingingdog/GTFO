@@ -3,6 +3,7 @@ const expect = require('chai').expect
 
 const getFlights = require('../utils/flightDetailUtils').getFlights
 const getNearestFlights = require('../utils/flightDetailUtils').getNearestFlights
+const addAirlineArrivalTimes= require('../utils/flightDetailUtils').addAirlineArrivalTimes
 const flightInfo = require('../publicAPIs/flightAwareAPI').queryFlightInfo
 const airlineArrivalTimes = require('../utils/flightAndAirportInfo').airlineArrivalTimes
 const airportLocations = require('../utils/flightAndAirportInfo').airportLocations
@@ -62,6 +63,34 @@ describe('getFlights', async () => {
       const closest = result[0].distance.value
       const closeEnough = result[1].distance.value
       assert.ok(closeEnough < (closest * 1.5))
+    })
+  })
+
+  describe('addAirlineArrivalTimes', () => {
+    let result
+    let domesticResult
+    let internationalResult
+    beforeEach(() => {
+      result = addAirlineArrivalTimes(mockData.flightInfo)
+      domesticResult = result[0]
+      internationalResult = result[1]
+    })
+
+    it('adds domestic airport arrival times to the flight details object', () => {
+      assert.equal(domesticResult.origin, mockData.flightInfo[0].origin)
+      assert.equal(
+        domesticResult.arriveAtGate,
+        airlineArrivalTimes.JQ.domestic.arriveAtGate
+      )
+    })
+
+    it('adds international arrival times if the airports are in different countries'
+    , () => {
+      assert.equal(internationalResult.origin, mockData.flightInfo[0].origin)
+      assert.equal(
+        internationalResult.arriveAtGate,
+        airlineArrivalTimes.JQ.international.arriveAtGate
+      )
     })
   })
 })

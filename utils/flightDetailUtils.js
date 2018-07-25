@@ -4,12 +4,9 @@ const airlineArrivalTimes = require('./flightAndAirportInfo').airlineArrivalTime
 const airportLocations = require('./flightAndAirportInfo').airportLocations
 
 const isFlightInternational = (origin, destination) => {
-  if (!(airportLocations[origin] && airportLocations[destination]))
-    return { airlineTimes: 'NONE' }
-
-  if (airportLocations[origin] && airportLocations[destination]) {
-    return !(airportLocations[origin] === airportLocations[destination])
-  }
+  if (!airportLocations[origin]) throw 'No record of origin airport.';
+  if (!airportLocations[destination]) throw 'No record of destination airport.'
+  return !(airportLocations[origin] === airportLocations[destination])
 }
 
 const findAirlineArrivalTimes = (tailNumber, international) => {
@@ -18,8 +15,7 @@ const findAirlineArrivalTimes = (tailNumber, international) => {
     return airlineArrivalTimes[airline].international
 
   if (airlineArrivalTimes[airline]) return airlineArrivalTimes[airline].domestic
-
-  return { airlineTimes: 'NONE' }
+  throw 'Could not find airline arrival time details.'
 }
 
 
@@ -117,5 +113,7 @@ const getFlights = async (
 
 module.exports = {
   getFlights: getFlights,
-  getNearestFlights: getNearestFlights
+  //for testing only
+  getNearestFlights: getNearestFlights,
+  addAirlineArrivalTimes: addAirlineArrivalTimes
 }

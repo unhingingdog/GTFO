@@ -11,10 +11,10 @@ const airlineArrivalTimes = {
     },
     international: {
       type: 'international',
-      checkInAndBagDropOpen: hour * 'sdfsadf',
-      checkInAndBagDropClose: hour * 'sdfasdf',
-      arriveAtGate: hour * 'sadfsdf',
-      gateClosed: hour * 'sdf'
+      checkInAndBagDropOpen: hour * 5,
+      checkInAndBagDropClose: hour * 5,
+      arriveAtGate: hour * 5,
+      gateClosed: hour * 5
     }
   },
   JST: {
@@ -27,10 +27,10 @@ const airlineArrivalTimes = {
     },
     international: {
       type: 'international',
-      checkInAndBagDropOpen: hour * 'sdfsadf',
-      checkInAndBagDropClose: hour * 'sdfasdf',
-      arriveAtGate: hour * 'sadfsdf',
-      gateClosed: hour * 'sdf'
+      checkInAndBagDropOpen: hour * 5,
+      checkInAndBagDropClose: hour * 5,
+      arriveAtGate: hour * 5,
+      gateClosed: hour * 5
     }
   }
 }
@@ -38,7 +38,8 @@ const airlineArrivalTimes = {
 const airportLocations = {
   NZCH: 'New Zealand',
   NZWN: 'New Zealand',
-  AKL: 'New Zealand'
+  AKL: 'New Zealand',
+  SFO: 'United States'
 }
 
 module.exports = {

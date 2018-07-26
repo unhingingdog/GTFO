@@ -35,7 +35,7 @@ describe('getFlights', async () => {
   })
 
   it('Should filter out any flights which have already departed', () => {
-    assert.lengthOf(result, 1)
+    assert.lengthOf(result, 2)
   })
 
   it('Should return combined data', () => {
@@ -50,6 +50,18 @@ describe('getFlights', async () => {
     assert(flightObject.filed_departuretime)
     assert.deepEqual(flightObject.duration, duration)
     assert.deepEqual(flightObject.distance, distance)
+    assert.equal(
+      flightObject.arriveAtGate,
+      airlineArrivalTimes.JQ.domestic.arriveAtGate
+    )
+  })
+
+  it('Should return international info if airport countries do not match', () => {
+    const flightObject = result[1]
+    assert.equal(
+      flightObject.arriveAtGate,
+      airlineArrivalTimes.JQ.international.arriveAtGate
+    )
   })
 
   describe('getNearestFlights', () => {
@@ -63,34 +75,6 @@ describe('getFlights', async () => {
       const closest = result[0].distance.value
       const closeEnough = result[1].distance.value
       assert.ok(closeEnough < (closest * 1.5))
-    })
-  })
-
-  describe('addAirlineArrivalTimes', () => {
-    let result
-    let domesticResult
-    let internationalResult
-    beforeEach(() => {
-      result = addAirlineArrivalTimes(mockData.flightInfo)
-      domesticResult = result[0]
-      internationalResult = result[1]
-    })
-
-    it('adds domestic airport arrival times to the flight details object', () => {
-      assert.equal(domesticResult.origin, mockData.flightInfo[0].origin)
-      assert.equal(
-        domesticResult.arriveAtGate,
-        airlineArrivalTimes.JQ.domestic.arriveAtGate
-      )
-    })
-
-    it('adds international arrival times if the airports are in different countries'
-    , () => {
-      assert.equal(internationalResult.origin, mockData.flightInfo[0].origin)
-      assert.equal(
-        internationalResult.arriveAtGate,
-        airlineArrivalTimes.JQ.international.arriveAtGate
-      )
     })
   })
 })

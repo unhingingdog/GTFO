@@ -17,7 +17,7 @@ export default (state = default_state, action) => {
   switch(action.type) {
     case GET_FLIGHT_DETAILS:
       const upcomingFlight = action.payload[0]
-      const nextFlight = action[1] ? action[1] : null
+      const nextFlight = action.payload[1] ? action.payload[1] : null
       return {
         flight: upcomingFlight.ident,
         filedDepartureTime: upcomingFlight.filed_departuretime,

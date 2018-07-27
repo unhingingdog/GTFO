@@ -26,7 +26,11 @@ export default (state = default_state, action) => {
         destination: upcomingFlight.destination,
         nextFlightDetails: nextFlight,
         distance: upcomingFlight.distance,
-        duration: upcomingFlight.duration
+        duration: upcomingFlight.duration,
+        arriveAtGate: upcomingFlight.arriveAtGate,
+        checkInAndBagDropClose: upcomingFlight.checkInAndBagDropClose,
+        checkInAndBagDropOpen: upcomingFlight.checkInAndBagDropOpen,
+        gateClosed: upcomingFlight.gateClosed
       }
     case UPDATE_FLIGHT_DETAILS:
       return {

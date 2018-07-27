@@ -18,7 +18,13 @@ describe('Flight reducer', () => {
       actualDepartureTime: null,
       origin: '',
       destination: '',
-      nextFlightDetails: {}
+      nextFlightDetails: {},
+      distance: {},
+      duration: {},
+      arriveAtGate: null,
+      checkInAndBagDropClose: null,
+      checkInAndBagDropOpen: null,
+      gateClosed: null
     }
     flightInfo = await flightInfoAsync('JQ291')
     flightInfo = flightInfo.map(flight => {
@@ -42,23 +48,13 @@ describe('Flight reducer', () => {
       destination: flightInfo[0].destination,
       nextFlightDetails: flightInfo[1],
       distance: flightInfo[0].distance,
-      duration: flightInfo[0].duration
+      duration: flightInfo[0].duration,
+      arriveAtGate: flightInfo[0].arriveAtGate,
+      checkInAndBagDropClose: flightInfo[0].checkInAndBagDropClose,
+      checkInAndBagDropOpen: flightInfo[0].checkInAndBagDropOpen,
+      gateClosed: flightInfo[0].gateClosed
     })
   })
-
-  // it('should update flight data', () => {
-  //   expect(flightReducer({...initial_state, flight: flightInfo.ident}, {
-  //     type: types.UPDATE_FLIGHT_DETAILS,
-  //     payload: flightInfo
-  //   })).toEqual({
-  //     flight: flightInfo.ident,
-  //     filedDepartureTime: flightInfo.filed_departuretime,
-  //     actualDepartureTime: flightInfo.actualdeparturetime,
-  //     origin: flightInfo.origin,
-  //     destination: flightInfo.destination,
-  //     nextFlightDetails: {}
-  //   })
-  // })
 
   it('should handle no flight data', () => {
     expect(flightReducer(initial_state, {

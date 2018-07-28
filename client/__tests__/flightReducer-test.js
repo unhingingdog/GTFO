@@ -24,7 +24,8 @@ describe('Flight reducer', () => {
       arriveAtGate: null,
       checkInAndBagDropClose: null,
       checkInAndBagDropOpen: null,
-      gateClosed: null
+      gateClosed: null,
+      error: null
     }
     flightInfo = await flightInfoAsync('JQ291')
     flightInfo = flightInfo.map(flight => {
@@ -41,6 +42,7 @@ describe('Flight reducer', () => {
       type: types.GET_FLIGHT_DETAILS,
       payload: flightInfo
     })).toEqual({
+      ...initial_state,
       flight: flightInfo[0].ident,
       filedDepartureTime: flightInfo[0].filed_departuretime,
       actualDepartureTime: flightInfo[0].actualdeparturetime,
@@ -57,14 +59,13 @@ describe('Flight reducer', () => {
   })
 
   it('should handle no flight data', () => {
+    const flightInfo = [{ error: "Airline unknown" }]
     expect(flightReducer(initial_state, {
-      type: types.COULD_NOT_FIND_FLIGHT
+      type: types.GET_FLIGHT_DETAILS,
+      payload: flightInfo
     })).toEqual({
-      flight: types.COULD_NOT_FIND_FLIGHT,
-      filedDepartureTime: types.COULD_NOT_FIND_FLIGHT,
-      actualDepartureTime: types.COULD_NOT_FIND_FLIGHT,
-      origin: types.COULD_NOT_FIND_FLIGHT,
-      destination: types.COULD_NOT_FIND_FLIGHT
+      ...initial_state,
+      error: "Airline unknown"
     })
   })
 })

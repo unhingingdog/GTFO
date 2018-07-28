@@ -64,6 +64,20 @@ describe('getFlights', async () => {
     )
   })
 
+  it('Should handle unknown airport', () => {})
+
+  it('should handle unknown airline', async () => {
+    result = await getFlights(
+      'XQ420',
+      36.1699,
+      -115.1398,
+      mockData.flightInfoAsync,
+      mockData.mockNavigationProvider
+    )
+    const flightObject = result[0]
+    assert.equal(flightObject.error, 'Airline unknown')
+  })
+
   describe('getNearestFlights', () => {
     let result
     beforeEach(() => {

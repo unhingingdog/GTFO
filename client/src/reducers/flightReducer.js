@@ -1,7 +1,5 @@
 import {
-  GET_FLIGHT_DETAILS,
-  COULD_NOT_FIND_FLIGHT,
-  UPDATE_FLIGHT_DETAILS
+  GET_FLIGHT_DETAILS
 } from '../types'
 
 const default_state = {
@@ -10,15 +8,21 @@ const default_state = {
   actualDepartureTime: null,
   origin: '',
   destination: '',
-  nextFlightDetails: null
+  nextFlightDetails: null,
+  error: null
 }
 
 export default (state = default_state, action) => {
   switch(action.type) {
     case GET_FLIGHT_DETAILS:
+      if (action.payload[0].error) return {
+         ...state,
+         error: action.payload[0].error
+      }
       const upcomingFlight = action.payload[0]
       const nextFlight = action.payload[1] ? action.payload[1] : null
       return {
+        ...state,
         flight: upcomingFlight.ident,
         filedDepartureTime: upcomingFlight.filed_departuretime,
         actualDepartureTime: upcomingFlight.actualdeparturetime,
@@ -31,20 +35,6 @@ export default (state = default_state, action) => {
         checkInAndBagDropClose: upcomingFlight.checkInAndBagDropClose,
         checkInAndBagDropOpen: upcomingFlight.checkInAndBagDropOpen,
         gateClosed: upcomingFlight.gateClosed
-      }
-    case UPDATE_FLIGHT_DETAILS:
-      return {
-        ...state,
-        filedDepartureTime: action.payload.filed_departuretime,
-        actualDepartureTime: action.payload.actualdeparturetime,
-      }
-    case COULD_NOT_FIND_FLIGHT:
-      return {
-        flight: COULD_NOT_FIND_FLIGHT,
-        filedDepartureTime: COULD_NOT_FIND_FLIGHT,
-        actualDepartureTime: COULD_NOT_FIND_FLIGHT,
-        origin: COULD_NOT_FIND_FLIGHT,
-        destination: COULD_NOT_FIND_FLIGHT
       }
     default:
       return state

@@ -47,13 +47,16 @@ export class FlightInput extends Component {
     )
   }
 
-  submitFlight = e => {
-    e.preventDefault()
-    const { submitFlight } = this.props
+  submitFlight = async event => {
+    event.preventDefault()
+    const { submitFlight, departure } = this.props
     const { currentLatitude, currentLongitude } = this.props
     const { formContent } = this.state
-    submitFlight(formContent, currentLatitude, currentLongitude)
-    cookies.set('flight', formContent, { path: '/' })
+    await submitFlight(formContent, currentLatitude, currentLongitude)
+    cookies.set('flight', formContent, {
+      path: '/',
+      expires: new Date((this.props.departure * 1000) + 3600000)
+    })
   }
 
   getGeolocation = () => {
@@ -84,6 +87,7 @@ const mapStateToProps = state => {
   return {
     flight: state.flight.flight,
     flightError: state.flight.error,
+    departure: state.flight.filedDepartureTime,
     currentLatitude: state.location.currentLatitude,
     currentLongitude: state.location.currentLongitude,
     currentlyLoading: state.loading.currentlyLoading,

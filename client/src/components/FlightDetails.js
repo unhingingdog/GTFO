@@ -15,21 +15,29 @@ export class FlightDetails extends Component {
       duration
     } = this.props
 
-    const leaveTime = new Date((departure - arriveAtGate - duration) * 1000).toTimeString()
+    const leaveforArriveAtGate =
+      new Date((departure - arriveAtGate - duration) * 1000).toTimeString()
 
+    const leaveForcheckInAndBagDropClose =
+      new Date((departure - checkInAndBagDropClose - duration) * 1000).toTimeString()
+
+    const leaveForGateClosed =
+      new Date((departure - gateClosed - duration) * 1000).toTimeString()
 
     return(
       <div>
         <h1>{flight}</h1>
-        <p>{originCity} to {destinationCity}</p>
-        <p>departs: {departure}</p>
+        <p>{originCity} to {destinationCity} - {new Date((departure) * 1000).toDateString()}</p>
+        <p>departs: {new Date((departure) * 1000).toTimeString()}</p>
         <br />
-        <p>Arrive at gate: {departure - arriveAtGate}</p>
-        <p>checkin and baggage drop close: {departure - checkInAndBagDropClose}</p>
-        <p>Check in and baggage open: {departure - checkInAndBagDropOpen}</p>
-        <p>Gate closes: {departure - gateClosed}</p>
+        <p>Arrive at gate: {new Date((departure - arriveAtGate) * 1000).toTimeString()}</p>
+        <p>checkin and baggage drop close: {new Date((departure - checkInAndBagDropClose) * 1000).toTimeString()}</p>
+        <p>Check in and baggage open: {new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString()}</p>
+        <p>Gate closes: {new Date((departure - gateClosed) * 1000).toTimeString()}</p>
 
-        <p>Leave to arrive at gate: {leaveTime}</p>
+        <p>Leave to arrive at gate: {leaveforArriveAtGate}</p>
+        <p>Leave to arrive before bag drop closes: {leaveForcheckInAndBagDropClose}</p>
+        <p>Leave to arrive before gate closes: {leaveForGateClosed}</p>
       </div>
     )
   }

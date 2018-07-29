@@ -15,11 +15,6 @@ export const submitFlight = (tailNumber, latitude, longitude) => async dispatch 
   const flightsData = await axios.get(
     `/api/get_flight/${tailNumber}&${latitude}&${longitude}`
   )
-
-  if (flightsData === types.COULD_NOT_FIND_FLIGHT) {
-    dispatch({ type: types.COULD_NOT_FIND_FLIGHT })
-  }
-  console.log(flightsData.data)
   dispatch({ type: types.GET_FLIGHT_DETAILS, payload: flightsData.data })
 }
 

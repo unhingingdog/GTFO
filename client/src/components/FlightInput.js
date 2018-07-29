@@ -24,6 +24,11 @@ export class FlightInput extends Component {
     this.setGeolocation()
   }
 
+  componentDidUpdate() {
+    const { flightError, flight, history } = this.props
+    if (!flightError && flight) history.push('/flight')
+  }
+
   render() {
     return(
       <div>
@@ -36,8 +41,7 @@ export class FlightInput extends Component {
             />
           </label>
           <p>{this.props.loadingMessage}</p>
-          <p>{this.props.origin} to {this.props.destination}</p>
-          <p>{this.props.loadingMessage}</p>
+          <p>{this.props.flightError}</p>
         </form>
       </div>
     )
@@ -79,8 +83,7 @@ export class FlightInput extends Component {
 const mapStateToProps = state => {
   return {
     flight: state.flight.flight,
-    origin: state.flight.origin,
-    destination: state.flight.destination,
+    flightError: state.flight.error,
     currentLatitude: state.location.currentLatitude,
     currentLongitude: state.location.currentLongitude,
     currentlyLoading: state.loading.currentlyLoading,

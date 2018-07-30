@@ -34,33 +34,29 @@ export class FlightInput extends Component {
       <div style={styles.container}>
         <h2>Get the Flight Out</h2>
         <form onSubmit={this.submitFlight} style={styles.form}>
-          <label>
-            <input
-              type="text"
-              value={this.state.formContent}
-              placeholder="flightnum"
-              maxlength="8"
-              onChange={e => this.setState({
-                formContent: e.target.value.toUpperCase()
-               })}
-              style={{
-                ...styles.input,
-                fontSize: this.fitFormTextSize(this.state.formContent)
-              }}
-            />
-          </label>
+          <input
+            type="text"
+            value={this.state.formContent}
+            placeholder="EG123"
+            maxlength="8"
+            onChange={e => this.setState({
+              formContent: e.target.value.toUpperCase()
+             })}
+            style={{
+              ...styles.input,
+              fontSize: this.fitFormTextSize(this.state.formContent)
+            }}
+          />
         </form>
         <p>{this.props.loadingMessage}</p>
         <p>{this.props.flightError}</p>
+        {(this.state.formContent.length >= 5) && <h2>V</h2>} 
       </div>
     )
   }
 
   fitFormTextSize = text => {
-    if (text.length > 5) {
-      const extraChars = text.length - 5
-      return 80 - (extraChars * 10)
-    }
+    if (text.length > 5) return 80 - ((text.length - 5) * 10)
     return 80
   }
 
@@ -131,7 +127,9 @@ const styles = {
     alignItems: 'center',
   },
   form: {
-    background:'yellow'
+    background:'yellow',
+    display: 'flex',
+    flexDirection: 'column'
   },
   input: {
     border: 'none',

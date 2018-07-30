@@ -31,20 +31,37 @@ export class FlightInput extends Component {
 
   render() {
     return(
-      <div>
-        <form onSubmit={this.submitFlight}>
+      <div style={styles.container}>
+        <h2>Get the Flight Out</h2>
+        <form onSubmit={this.submitFlight} style={styles.form}>
           <label>
             <input
               type="text"
               value={this.state.formContent}
-              onChange={e => this.setState({ formContent: e.target.value })}
+              placeholder="flightnum"
+              maxlength="8"
+              onChange={e => this.setState({
+                formContent: e.target.value.toUpperCase()
+               })}
+              style={{
+                ...styles.input,
+                fontSize: this.fitFormTextSize(this.state.formContent)
+              }}
             />
           </label>
-          <p>{this.props.loadingMessage}</p>
-          <p>{this.props.flightError}</p>
         </form>
+        <p>{this.props.loadingMessage}</p>
+        <p>{this.props.flightError}</p>
       </div>
     )
+  }
+
+  fitFormTextSize = text => {
+    if (text.length > 5) {
+      const extraChars = text.length - 5
+      return 80 - (extraChars * 10)
+    }
+    return 80
   }
 
   submitFlight = async event => {
@@ -101,3 +118,27 @@ export default connect(mapStateToProps, {
   startLoading,
   stopLoading
 })(FlightInput)
+
+const styles = {
+  container: {
+    background: '#d80404',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    width: '100vw',
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  form: {
+    background:'yellow'
+  },
+  input: {
+    border: 'none',
+    height: '20vh',
+    width: '80vw',
+    textAlign: 'center',
+    color: 'white',
+    background: '#d80404'
+  }
+}

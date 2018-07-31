@@ -31,29 +31,35 @@ export class FlightInput extends Component {
 
   render() {
     return(
-      <div style={styles.container}>
-        <h2>Get the Flight Out</h2>
-        <form onSubmit={this.submitFlight} style={styles.form}>
-          <input
-            type="text"
-            value={this.state.formContent}
-            placeholder="EG123"
-            maxlength="8"
-            onChange={e => this.setState({
-              formContent: e.target.value.toUpperCase()
-             })}
-            style={{
-              ...styles.input,
-              fontSize: this.fitFormTextSize(this.state.formContent)
-            }}
-          />
-        </form>
-        <p>{this.props.loadingMessage}</p>
-        <p>{this.props.flightError}</p>
-        {(this.state.formContent.length >= 5) && <h2>V</h2>} 
+      <div id="container">
+        <div id="title">
+          <h2>Get the Flight Out</h2>
+        </div>
+        <div id="form-container">
+          <form onSubmit={this.submitFlight} id="form">
+            <input
+              type="text"
+              value={this.state.formContent}
+              placeholder="EG123"
+              maxlength="8"
+              onChange={e => this.setState({
+                formContent: e.target.value.toUpperCase()
+               })}
+              style={{ fontSize: this.fitFormTextSize(this.state.formContent) }}
+              id="input"
+            />
+          </form>
+        </div>
+        <div id="button">
+          {(this.state.formContent.length >= 5) &&
+            <h2>V</h2>}
+        </div>
       </div>
     )
   }
+
+  // <p>{this.props.loadingMessage}</p>
+  // <p>{this.props.flightError}</p>
 
   fitFormTextSize = text => {
     if (text.length > 5) return 80 - ((text.length - 5) * 10)
@@ -114,29 +120,3 @@ export default connect(mapStateToProps, {
   startLoading,
   stopLoading
 })(FlightInput)
-
-const styles = {
-  container: {
-    background: '#d80404',
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    width: '100vw',
-    height: '100vh',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  form: {
-    background:'yellow',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  input: {
-    border: 'none',
-    height: '20vh',
-    width: '80vw',
-    textAlign: 'center',
-    color: 'white',
-    background: '#d80404'
-  }
-}

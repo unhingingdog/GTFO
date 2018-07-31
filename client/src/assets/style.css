@@ -1,0 +1,85 @@
+#container {
+  background-color: #d80404;
+  display: grid;
+  grid-template-areas: "title" "form-container" "button";
+  grid-template-columns:  1fr;
+  grid-auto-rows: repeat(3, 33vh);
+  height: 100vh;
+  width: 100vw;
+}
+
+#title {
+  grid-area: title;
+  min-height: 33.3vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pacifico', cursive;
+  color: white;
+  font-size: 50px
+}
+
+#formContainer {
+  grid-area: form-container;
+  min-height: 33.3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#form {
+  width: 100%;
+  height: 100%;
+  min-height: 33.3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"] {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: pink;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: pink;
+}
+
+#input {
+  border: none;
+  text-align: center;
+  color: white;
+  background: #d80404;
+  width: 100%;
+}
+
+#button {
+  grid-area: button;
+  min-height: 33.3vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  #title {
+    font-size: 25px
+  }
+
+  #input {
+    border: none;
+    text-align: center;
+    color: white;
+    background: #d80404;
+    width: 80%;
+    height: 70%;
+  }
+}

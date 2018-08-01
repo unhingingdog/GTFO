@@ -64,22 +64,28 @@ input[type="text"] {
 #button {
   grid-area: button;
   min-height: 33.3vh;
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@keyframes Pulse {
+	0% { filter: drop-shadow(0 0 1rem white); }
+	50% { filter: drop-shadow(0 0 0.1rem white); }
+	100% { filter: drop-shadow(0 0 0 8rem white); }
+}
+
+#plane-icon {
+  margin-top: -40px;
+  width: 60%;
+  height: 60%;
+  animation: Pulse 3s infinite ease-in-out;
+  transform: rotate(135deg);
+
 }
 
 @media only screen and (max-width: 600px) {
   #title {
     font-size: 25px
-  }
-
-  #input {
-    border: none;
-    text-align: center;
-    color: white;
-    background: #d80404;
-    width: 80%;
-    height: 70%;
   }
 }

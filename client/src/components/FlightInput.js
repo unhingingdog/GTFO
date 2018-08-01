@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
+import { isMobile } from "react-device-detect";
+import airplane from '../assets/airplane-shape.svg'
 import {
   submitFlight,
   setCurrentLocation,
@@ -8,6 +10,7 @@ import {
   stopLoading
 } from '../actions'
 import { CURRENT_LOCATION_NOT_ENABLED } from '../types'
+
 
 const cookies = new Cookies()
 
@@ -52,7 +55,7 @@ export class FlightInput extends Component {
         </div>
         <div id="button">
           {(this.state.formContent.length >= 5) &&
-            <h2>V</h2>}
+            <img src={airplane} id="plane-icon"/>}
         </div>
       </div>
     )
@@ -62,8 +65,12 @@ export class FlightInput extends Component {
   // <p>{this.props.flightError}</p>
 
   fitFormTextSize = text => {
-    if (text.length > 5) return 80 - ((text.length - 5) * 10)
-    return 80
+    if (isMobile) {
+      if (text.length > 5) return 100 - ((text.length - 5) * 10)
+      return 100
+    }
+    if (text.length > 5) return 180 - ((text.length - 5) * 10)
+    return 180
   }
 
   submitFlight = async event => {

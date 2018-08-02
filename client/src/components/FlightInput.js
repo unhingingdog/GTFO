@@ -24,7 +24,12 @@ export class FlightInput extends Component {
 
   componentDidMount() {
     this.setState({ formContent: cookies.get('flight') || '' })
+    window.addEventListener('scroll', this.onScroll, false)
     this.setGeolocation()
+  }
+
+  onScroll = () => {
+    this.submitOnScrollIfFlightCodePresent(this.state.formContent.length)
   }
 
   componentDidUpdate() {
@@ -34,17 +39,17 @@ export class FlightInput extends Component {
 
   render() {
     return(
-      <div id="container">
+      <div id="container" onScroll={() => console.log('scrolled')}>
         <div id="title">
           <h2>Get the Flight Out</h2>
         </div>
         <div id="form-container">
-          <form onSubmit={this.submitFlight} id="form">
+          <form onSubmit={this.handleFormSubmit} id="form">
             <input
               type="text"
               value={this.state.formContent}
               placeholder="EG123"
-              maxlength="8"
+              maxLength="8"
               onChange={e => this.setState({
                 formContent: e.target.value.toUpperCase()
                })}
@@ -73,8 +78,7 @@ export class FlightInput extends Component {
     return 180
   }
 
-  submitFlight = async event => {
-    event.preventDefault()
+  submitFlightCode = async () => {
     const { submitFlight, departure } = this.props
     const { currentLatitude, currentLongitude } = this.props
     const { formContent } = this.state
@@ -83,6 +87,15 @@ export class FlightInput extends Component {
       path: '/',
       expires: new Date((this.props.departure * 1000) + 3600000)
     })
+  }
+
+  submitOnScrollIfFlightCodePresent = textLength => {
+    if (textLength >= 5) this.submitFlightCode()
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault()
+    this.submitFlightCode()
   }
 
   getGeolocation = () => {

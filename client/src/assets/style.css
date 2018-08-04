@@ -69,19 +69,44 @@ input[type="text"] {
   align-items: center;
 }
 
+#loading {
+  font-family: 'Do Hyeon', sans-serif;
+  color: #feffea;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes Pulse {
-	0% { filter: drop-shadow(0 0 1rem goldenrod); }
-	50% { filter: drop-shadow(0 0 0.1rem goldenrod); }
-	100% { filter: drop-shadow(0 0 0 8rem goldenrod); }
+	0% { filter: drop-shadow(0 0 0px yellow); }
+	50% { filter: drop-shadow(0 0 20px yellow); }
 }
 
 #plane-icon {
   margin-top: -40px;
-  width: 60%;
-  height: 60%;
+  width: 50%;
+  height: 50%;
   animation: Pulse 3s infinite ease-in-out;
-  transform: rotate(135deg);
-  color: goldenrod;
+  transform: rotate(315deg);
+  transition: width 1s, height 1s, margin-top 1s;
+}
+
+#plane-icon-takeoff {
+  margin-top: -1900px;
+  width: 200%;
+  height: 200%;
+  transform: rotate(315deg);
+}
+
+@keyframes Pulse {
+	0% { filter: drop-shadow(0 0 0px white); }
+	50% { filter: drop-shadow(0 0 20px #feffea); }
+}
+
+.loading-plane-icon {
+  background: blue;
+
 }
 
 @media only screen and (max-width: 600px) {

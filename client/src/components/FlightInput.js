@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
 import { isMobile } from "react-device-detect";
-import airplane from '../assets/airplane-shape.svg'
+import Loading from './Loading'
+import Input from './Input'
+import PlaneButton from './PlaneButton'
 import {
   submitFlight,
   setCurrentLocation,
@@ -19,6 +21,7 @@ export class FlightInput extends Component {
     super(props)
     this.state = {
       formContent: '',
+      takeoff: false
     }
   }
 
@@ -29,7 +32,7 @@ export class FlightInput extends Component {
   }
 
   onScroll = () => {
-    this.submitOnScrollIfFlightCodePresent(this.state.formContent.length)
+    this.submitOnScrollIfFlightCodePresent()
   }
 
   componentDidUpdate() {
@@ -37,37 +40,38 @@ export class FlightInput extends Component {
     if (!flightError && flight) history.push('/flight')
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
   render() {
+    const { loadingMessage } = this.props
+
     return(
-      <div id="container" onScroll={() => console.log('scrolled')}>
+      <div id="container">
         <div id="title">
           <h2>Get the Flight Out</h2>
         </div>
-        <div id="form-container">
-          <form onSubmit={this.handleFormSubmit} id="form">
-            <input
-              type="text"
-              value={this.state.formContent}
-              placeholder="EG123"
-              maxLength="8"
-              onChange={e => this.setState({
-                formContent: e.target.value.toUpperCase()
-               })}
-              style={{ fontSize: this.fitFormTextSize(this.state.formContent) }}
-              id="input"
-            />
-          </form>
-        </div>
-        <div id="button">
-          {(this.state.formContent.length >= 5) &&
-            <img src={airplane} id="plane-icon"/>}
-        </div>
+        <Input
+          formContent={this.state.formContent}
+          handleFormSubmit={this.handleFormSubmit}
+          handleChange={this.handleChange}
+          isMobile={isMobile}
+        />
+        <PlaneButton
+          formContent={this.state.formContent}
+          submitFlightCode={this.submitFlightCode}
+        />
       </div>
     )
   }
 
-  // <p>{this.props.loadingMessage}</p>
-  // <p>{this.props.flightError}</p>
+  handleChange = event => {
+    this.setState({
+      formContent: event.target.value.toUpperCase()
+     })
+     console.log(this.state.formContent)
+  }
 
   fitFormTextSize = text => {
     if (isMobile) {
@@ -79,18 +83,24 @@ export class FlightInput extends Component {
   }
 
   submitFlightCode = async () => {
-    const { submitFlight, departure } = this.props
-    const { currentLatitude, currentLongitude } = this.props
-    const { formContent } = this.state
-    await submitFlight(formContent, currentLatitude, currentLongitude)
-    cookies.set('flight', formContent, {
-      path: '/',
-      expires: new Date((this.props.departure * 1000) + 3600000)
-    })
+    this.setState({ takeoff: true })
+
+    setTimeout(async () => {
+      const { submitFlight, departure,startLoading, stopLoading } = this.props
+      const { currentLatitude, currentLongitude } = this.props
+      const { formContent, takeoff } = this.state
+      startLoading('Submitting')
+      await submitFlight(formContent, currentLatitude, currentLongitude)
+      cookies.set('flight', formContent, {
+        path: '/',
+        expires: new Date((this.props.departure * 1000) + 3600000)
+      })
+      stopLoading()
+    }, 500)
   }
 
-  submitOnScrollIfFlightCodePresent = textLength => {
-    if (textLength >= 5) this.submitFlightCode()
+  submitOnScrollIfFlightCodePresent = () => {
+    if (this.state.formContent.length >= 5) this.submitFlightCode()
   }
 
   handleFormSubmit = event => {

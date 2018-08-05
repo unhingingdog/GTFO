@@ -53,6 +53,11 @@ input[type="text"] {
   color: pink;
 }
 
+@keyframes Pulse {
+	0% { filter: drop-shadow(0 0 0px yellow); }
+	50% { filter: drop-shadow(0 0 20px yellow); }
+}
+
 #input {
   border: none;
   text-align: center;
@@ -78,18 +83,32 @@ input[type="text"] {
   align-items: center;
 }
 
-@keyframes Pulse {
-	0% { filter: drop-shadow(0 0 0px yellow); }
-	50% { filter: drop-shadow(0 0 20px yellow); }
+#plane {
+  width: 100px;
+  height: 100px;
+  transform: rotate(90deg);
 }
 
-#plane-icon {
-  margin-top: -40px;
-  width: 50%;
-  height: 50%;
-  animation: Pulse 3s infinite ease-in-out;
-  transform: rotate(315deg);
-  transition: width 1s, height 1s, margin-top 1s;
+#plane:hover {
+  filter: drop-shadow(0 0 20px white)
+}
+
+.plane-enter {
+  transform: translateX(-600%) scale(1);
+}
+
+.plane-enter-active{
+  transform: translateY(0%) scale(1);
+  transition: all 600ms ease-out;
+}
+
+.plane-exit-active {
+  transform: scale(1.25);
+}
+
+.plane-exit {
+  transform: translateX(800%) scale(1);
+  transition: all 600ms ease-in;
 }
 
 #plane-icon-takeoff {

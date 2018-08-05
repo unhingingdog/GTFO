@@ -1,5 +1,6 @@
 import {
-  GET_FLIGHT_DETAILS
+  GET_FLIGHT_DETAILS,
+  CLEAR_FLIGHT_ERROR
 } from '../types'
 
 const default_state = {
@@ -13,7 +14,6 @@ const default_state = {
 }
 
 export default (state = default_state, action) => {
-  console.log(action.payload)
   switch(action.type) {
     case GET_FLIGHT_DETAILS:
       if (action.payload[0].error) return {
@@ -39,6 +39,11 @@ export default (state = default_state, action) => {
         gateClosed: upcomingFlight.gateClosed,
         originCity: upcomingFlight.originCity,
         destinationCity: upcomingFlight.destinationCity
+      }
+    case CLEAR_FLIGHT_ERROR:
+      return {
+        ...state,
+        error: null
       }
     default:
       return state

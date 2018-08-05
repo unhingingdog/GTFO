@@ -18,6 +18,11 @@ export const submitFlight = (tailNumber, latitude, longitude) => async dispatch 
   dispatch({ type: types.GET_FLIGHT_DETAILS, payload: flightsData.data })
 }
 
+export const clearFlightError = () => {
+  return { type: types.CLEAR_FLIGHT_ERROR }
+}
+
+
 export const startLoading = message => {
   return { type: types.START_LOADING, payload: message }
 }

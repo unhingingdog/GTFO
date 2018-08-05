@@ -7,6 +7,7 @@ import Input from './Input'
 import PlaneButton from './PlaneButton'
 import {
   submitFlight,
+  clearFlightError,
   setCurrentLocation,
   startLoading,
   stopLoading
@@ -20,19 +21,13 @@ export class FlightInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      formContent: '',
-      takeoff: false
+      formContent: ''
     }
   }
 
   componentDidMount() {
     this.setState({ formContent: cookies.get('flight') || '' })
-    window.addEventListener('scroll', this.onScroll, false)
     this.setGeolocation()
-  }
-
-  onScroll = () => {
-    this.submitOnScrollIfFlightCodePresent()
   }
 
   componentDidUpdate() {
@@ -45,7 +40,7 @@ export class FlightInput extends Component {
   }
 
   render() {
-    const { loadingMessage } = this.props
+    const { loadingMessage, flightError } = this.props
 
     return(
       <div id="container">
@@ -61,6 +56,8 @@ export class FlightInput extends Component {
         <PlaneButton
           formContent={this.state.formContent}
           submitFlightCode={this.submitFlightCode}
+          loadingMessage={loadingMessage}
+          error={flightError}
         />
       </div>
     )
@@ -70,37 +67,30 @@ export class FlightInput extends Component {
     this.setState({
       formContent: event.target.value.toUpperCase()
      })
-     console.log(this.state.formContent)
-  }
-
-  fitFormTextSize = text => {
-    if (isMobile) {
-      if (text.length > 5) return 100 - ((text.length - 5) * 10)
-      return 100
-    }
-    if (text.length > 5) return 180 - ((text.length - 5) * 10)
-    return 180
   }
 
   submitFlightCode = async () => {
-    this.setState({ takeoff: true })
+    const {
+      submitFlight,
+      departure,
+      startLoading,
+      stopLoading,
+      flightError,
+      clearFlightError,
+      currentLatitude,
+      currentLongitude
+    } = this.props
 
-    setTimeout(async () => {
-      const { submitFlight, departure,startLoading, stopLoading } = this.props
-      const { currentLatitude, currentLongitude } = this.props
-      const { formContent, takeoff } = this.state
-      startLoading('Submitting')
-      await submitFlight(formContent, currentLatitude, currentLongitude)
-      cookies.set('flight', formContent, {
-        path: '/',
-        expires: new Date((this.props.departure * 1000) + 3600000)
-      })
-      stopLoading()
-    }, 500)
-  }
+    const { formContent } = this.state
 
-  submitOnScrollIfFlightCodePresent = () => {
-    if (this.state.formContent.length >= 5) this.submitFlightCode()
+    if (flightError) clearFlightError()
+    startLoading('Submitting')
+    await submitFlight(formContent, currentLatitude, currentLongitude)
+    cookies.set('flight', formContent, {
+      path: '/',
+      expires: new Date((this.props.departure * 1000) + 3600000)
+    })
+    stopLoading()
   }
 
   handleFormSubmit = event => {
@@ -146,6 +136,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   submitFlight,
+  clearFlightError,
   setCurrentLocation,
   startLoading,
   stopLoading

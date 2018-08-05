@@ -3,8 +3,8 @@ import React from 'react'
 
 const fitFormTextSize = (text, isMobile) => {
   if (isMobile) {
-    if (text.length > 5) return 100 - ((text.length - 5) * 10)
-    return 100
+    if (text.length > 5) return 77 - ((text.length - 5) * 10)
+    return 77
   }
   if (text.length > 5) return 180 - ((text.length - 5) * 10)
   return 180
@@ -20,7 +20,9 @@ export default ({ formContent, handleFormSubmit, handleChange, isMobile }) => {
           placeholder="EG123"
           maxLength="8"
           onChange={event => handleChange(event)}
-          style={{ fontSize: fitFormTextSize(formContent) }}
+          style={{
+            fontSize: fitFormTextSize(formContent, isMobile),
+          }}
           id="input"
         />
       </form>

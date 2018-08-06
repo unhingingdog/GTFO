@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import airplane from '../assets/airplane-shape.png'
+import { FaPlane } from 'react-icons/fa'
 import '../assets/style.css'
 
 export default class PlaneButton extends Component {
@@ -38,12 +38,19 @@ export default class PlaneButton extends Component {
 
   render() {
     const { showPlane, showError } = this.state
-    const { loadingMessage, submitFlightCode, error } = this.props
+    const { loadingMessage, submitFlightCode, error, formContent } = this.props
 
     return(
       <div id="button">
-        {showError ? error : ""}
-        <h2>{loadingMessage}</h2>
+        <h2 className="flight-input-message">
+          {
+            showError ? error :
+              loadingMessage ? loadingMessage :
+                (!showError && !loadingMessage && !showPlane && !formContent) ?
+                  'Enter your flight number' : ''
+          }
+        </h2>
+
         <CSSTransition
           in={showPlane && !loadingMessage && !showError}
           timeout={2000}
@@ -52,8 +59,7 @@ export default class PlaneButton extends Component {
           unmountOnExit
         >{state => (
           <div>
-            <img
-              src={airplane}
+            <FaPlane
               onClick={submitFlightCode}
               id="plane"
             />

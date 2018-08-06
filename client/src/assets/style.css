@@ -69,24 +69,19 @@ input[type="text"] {
 #button {
   grid-area: button;
   min-height: 33.3vh;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-#loading {
-  font-family: 'Do Hyeon', sans-serif;
-  color: #feffea;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 #plane {
-  width: 100px;
-  height: 100px;
-  transform: rotate(90deg);
+  margin-top: -30px;
+  width: 150px;
+  height: 150px;
+  color: #feffea;
 }
 
 #plane:hover {
@@ -94,12 +89,12 @@ input[type="text"] {
 }
 
 .plane-enter {
-  transform: translateX(-600%) scale(1);
+  transform: translateX(-500%) scale(1);
 }
 
 .plane-enter-active{
   transform: translateY(0%) scale(1);
-  transition: all 600ms ease-out;
+  transition: all 500ms ease-out;
 }
 
 .plane-exit-active {
@@ -107,8 +102,8 @@ input[type="text"] {
 }
 
 .plane-exit {
-  transform: translateX(800%) scale(1);
-  transition: all 600ms ease-in;
+  transform: translateX(500%) scale(1);
+  transition: all 500ms ease-in;
 }
 
 #plane-icon-takeoff {
@@ -123,13 +118,24 @@ input[type="text"] {
 	50% { filter: drop-shadow(0 0 20px #feffea); }
 }
 
-.loading-plane-icon {
-  background: blue;
-
+.flight-input-message {
+  font-family: 'Do Hyeon', sans-serif;
+  color: #feffea;
+  font-size: 30px;
+  position: absolute;
+  margin-top: -2%;
 }
 
 @media only screen and (max-width: 600px) {
   #title {
     font-size: 25px
+  }
+
+  .flight-input-message {
+    font-family: 'Do Hyeon', sans-serif;
+    color: #feffea;
+    font-size: 30px;
+    position: absolute;
+    margin-top: -7%;
   }
 }

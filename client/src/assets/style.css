@@ -53,11 +53,6 @@ input[type="text"] {
   color: pink;
 }
 
-@keyframes Pulse {
-	0% { filter: drop-shadow(0 0 0px yellow); }
-	50% { filter: drop-shadow(0 0 20px yellow); }
-}
-
 #input {
   border: none;
   text-align: center;
@@ -106,36 +101,51 @@ input[type="text"] {
   transition: all 500ms ease-in;
 }
 
-#plane-icon-takeoff {
-  margin-top: -1900px;
-  width: 200%;
-  height: 200%;
-  transform: rotate(315deg);
-}
-
-@keyframes Pulse {
-	0% { filter: drop-shadow(0 0 0px white); }
-	50% { filter: drop-shadow(0 0 20px #feffea); }
-}
-
 .flight-input-message {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Oxygen', sans-serif;
   color: #feffea;
   font-size: 30px;
   position: absolute;
   margin-top: -2%;
 }
 
+#flight-details-container {
+  background-color: #d80404;
+  display: grid;
+  color: white;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Oxygen', sans-serif;
+}
+
+
+
 @media only screen and (max-width: 600px) {
+  #container {
+    background-color: #d80404;
+    display: grid;
+    grid-template-areas: "title" "form-container" "button";
+    grid-template-columns:  1fr;
+    grid-auto-rows: repeat(3, 33vh);
+    width: 100vw;
+  }
+
   #title {
     font-size: 25px
   }
 
   .flight-input-message {
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Oxygen', sans-serif;
     color: #feffea;
-    font-size: 30px;
+    font-size: 20px;
     position: absolute;
     margin-top: -7%;
+  }
+
+  #plane {
+    margin-top: -30px;
+    width: 100px;
+    height: 100px;
+    color: #feffea;
   }
 }

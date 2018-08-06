@@ -19,21 +19,38 @@ export class FlightDetails extends Component {
       new Date((departure - arriveAtGate - duration) * 1000).toTimeString()
 
     const leaveForcheckInAndBagDropClose =
-      new Date((departure - checkInAndBagDropClose - duration) * 1000).toTimeString()
+      new Date((departure - checkInAndBagDropClose - duration) * 1000)
+        .toTimeString()
 
     const leaveForGateClosed =
       new Date((departure - gateClosed - duration) * 1000).toTimeString()
 
+    const date = new Date((departure) * 1000).toDateString()
+
+    const departureTime = new Date((departure) * 1000).toTimeString()
+
+    const arriveAtGateTime = new Date((departure - arriveAtGate) * 1000)
+      .toTimeString()
+
+    const checkinAndBaggageDropCloseTime =
+      new Date((departure - checkInAndBagDropClose) * 1000).toTimeString()
+
+    const checkInAndBaggageOpenTime =
+      new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString()
+
+    const gateCloseTime = new Date((departure - gateClosed) * 1000)
+      .toTimeString()
+
     return(
-      <div>
+      <div id="flight-details-container">
         <h1>{flight}</h1>
-        <p>{originCity} to {destinationCity} - {new Date((departure) * 1000).toDateString()}</p>
-        <p>departs: {new Date((departure) * 1000).toTimeString()}</p>
+        <p>{originCity} to {destinationCity} - {date}</p>
+        <p>departs: {departureTime}</p>
         <br />
-        <p>Arrive at gate: {new Date((departure - arriveAtGate) * 1000).toTimeString()}</p>
-        <p>checkin and baggage drop close: {new Date((departure - checkInAndBagDropClose) * 1000).toTimeString()}</p>
-        <p>Check in and baggage open: {new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString()}</p>
-        <p>Gate closes: {new Date((departure - gateClosed) * 1000).toTimeString()}</p>
+        <p>Arrive at gate: {arriveAtGateTime}</p>
+        <p>checkin and baggage drop close: {checkinAndBaggageDropCloseTime}</p>
+        <p>Check in and baggage open: {checkInAndBaggageOpenTime}</p>
+        <p>Gate closes: {gateCloseTime}</p>
 
         <p>Leave to arrive at gate: {leaveforArriveAtGate}</p>
         <p>Leave to arrive before bag drop closes: {leaveForcheckInAndBagDropClose}</p>

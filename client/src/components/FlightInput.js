@@ -100,14 +100,14 @@ export class FlightInput extends Component {
 
   getGeolocation = () => {
     return new Promise((resolve, reject) => {
-      window.navigator.geolocation.getCurrentPosition(resolve, reject)
+      navigator.geolocation.getCurrentPosition(resolve, reject)
     })
   }
 
   setGeolocation = () => {
     const { setCurrentLocation, startLoading, stopLoading } = this.props
     startLoading('Where you at?')
-
+    document.write('result')
     this.getGeolocation()
       .then(result => {
         console.log(result)
@@ -116,6 +116,7 @@ export class FlightInput extends Component {
       })
       .catch(err => {
         console.log(err)
+        document.write(err)
         setCurrentLocation(CURRENT_LOCATION_NOT_ENABLED)
         stopLoading()
       })

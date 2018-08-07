@@ -15,7 +15,11 @@ export const submitFlight = (tailNumber, latitude, longitude) => async dispatch 
   const flightsData = await axios.get(
     `/api/get_flight/${tailNumber}&${latitude}&${longitude}`
   )
-  dispatch({ type: types.GET_FLIGHT_DETAILS, payload: flightsData.data })
+
+  dispatch({
+    type: types.GET_FLIGHT_DETAILS,
+    payload: flightsData.data.reverse()
+  })
 }
 
 export const clearFlightError = () => {

@@ -28,6 +28,7 @@ describe('Flight reducer', () => {
       error: null
     }
     flightInfo = await flightInfoAsync('JQ291')
+    flightInfo = flightInfo.reverse()
     flightInfo = flightInfo.map(flight => {
       return {
         ...flight,

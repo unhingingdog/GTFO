@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Slider, { Range } from 'rc-slider'
+import 'rc-slider/assets/index.css'
 
 export class FlightDetails extends Component {
   render() {
@@ -43,6 +45,9 @@ export class FlightDetails extends Component {
 
     return(
       <div id="flight-details-container">
+        <div>
+          <Slider />
+        </div>
         <h1>{flight}</h1>
         <p>{originCity} to {destinationCity} - {date}</p>
         <p>departs: {departureTime}</p>

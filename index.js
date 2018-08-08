@@ -1,8 +1,11 @@
 const express = require('express')
 const path = require('path')
 const getFlights = require('./utils/flightDetailUtils').getFlights
+const sslRedirect = require('heroku-ssl-redirect')
 
 const app = express()
+
+app.use(sslRedirect())
 
 app.get('/api/get_flight/:tailNumber&:currentLatitude&:currentLongitude',
 async (req, res) => {

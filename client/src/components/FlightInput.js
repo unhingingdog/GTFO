@@ -105,7 +105,13 @@ export class FlightInput extends Component {
   }
 
   setGeolocation = () => {
-    const { setCurrentLocation, startLoading, stopLoading } = this.props
+    const {
+      setCurrentLocation,
+      startLoading,
+      stopLoading,
+      history
+    } = this.props
+
     startLoading('Where you at?')
     this.getGeolocation()
       .then(result => {
@@ -115,8 +121,8 @@ export class FlightInput extends Component {
       })
       .catch(err => {
         console.log(err)
-        document.write(err)
         setCurrentLocation(CURRENT_LOCATION_NOT_ENABLED)
+        history.push('/no_location')
         stopLoading()
       })
   }

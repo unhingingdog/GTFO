@@ -5,6 +5,7 @@ import styles from '../assets/style.css'
 
 import FlightInput from './FlightInput'
 import FlightDetails from './FlightDetails'
+import NoLocation from './NoLocation'
 
 import * as actions from '../actions'
 
@@ -16,6 +17,7 @@ class App extends Component {
           <div>
             <Route path="/" exact component={FlightInput} />
             <Route path="/flight" component={FlightDetails} />
+            <Route path="/no_location" component={NoLocation} />
           </div>
         </BrowserRouter>
       </div>

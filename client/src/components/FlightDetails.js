@@ -4,6 +4,14 @@ import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 export class FlightDetails extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      sliderValue: 0
+    }
+  }
+
   render() {
     const {
       flight,
@@ -45,12 +53,15 @@ export class FlightDetails extends Component {
 
     return(
       <div id="flight-details-container">
-        <div>
-          <Slider />
-        </div>
         <h1>{flight}</h1>
         <p>{originCity} to {destinationCity} - {date}</p>
         <p>departs: {departureTime}</p>
+        <br />
+        <div className="slider-container">
+          <Slider
+
+          />
+        </div>
         <br />
         <p>Arrive at gate: {arriveAtGateTime}</p>
         <p>checkin and baggage drop close: {checkinAndBaggageDropCloseTime}</p>

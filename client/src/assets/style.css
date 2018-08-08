@@ -118,7 +118,19 @@ input[type="text"] {
   font-family: 'Oxygen', sans-serif;
 }
 
+.slider-container {
+  width: 50vw;
+}
 
+#no-location-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  background-color: red;
+}
 
 @media only screen and (max-width: 600px) {
   #container {

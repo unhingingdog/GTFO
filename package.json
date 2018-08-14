@@ -15,6 +15,11 @@
     "start": "node index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/client/__mocks__/styleMock.js"
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -32,7 +37,9 @@
     "mocha": "^5.2.0",
     "node-rest-client-promise": "^3.1.0",
     "rc-slider": "^8.6.1",
+    "react": "^16.4.2",
     "react-device-detect": "^1.5.8",
+    "react-dom": "^16.4.2",
     "react-icons": "^3.0.4",
     "react-transition-group": "^2.4.0",
     "request": "^2.85.0",

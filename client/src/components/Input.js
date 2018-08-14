@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const fitFormTextSize = (text, isMobile) => {
   if (isMobile) {
     if (text.length > 5) return 77 - ((text.length - 5) * 10)

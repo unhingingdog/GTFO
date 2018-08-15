@@ -35,7 +35,7 @@ it('renders the title, Input, and PlaneButton', () => {
   expect(wrapped.find(PlaneButton).length).to.equal(1)
 })
 
-it('allows the user to input a flight', () => {
+it('allows the user to input a flight number', () => {
   wrapped.find('input').simulate('change', { target: { value: 'EG123' } })
   wrapped.update()
   expect(wrapped.find('input').prop('value')).to.equal('EG123')

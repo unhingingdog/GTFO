@@ -13,12 +13,11 @@ beforeEach(() => {
   wrapped = mount(
     <PlaneButton
       formContent=""
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage={null}
       error={null}
     />
   )
-
 })
 
 afterEach(() => wrapped.unmount())
@@ -32,7 +31,7 @@ it('shows a loading message if loading', () => {
   wrapped = mount(
     <PlaneButton
       formContent=""
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage="loading message"
       error={null}
     />
@@ -46,7 +45,7 @@ it('shows a loading message if loading', () => {
   wrapped = mount(
     <PlaneButton
       formContent=""
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage="loading message"
       error={null}
     />
@@ -60,7 +59,7 @@ it('shows an error message if there is one', () => {
   wrapped = mount(
     <PlaneButton
       formContent=""
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage={null}
       error="error message"
     />
@@ -75,7 +74,7 @@ it('does not show the plane icon when < 5 characters in Input', () => {
   wrapped = mount(
     <PlaneButton
       formContent="123"
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage="loading message"
       error={null}
     />
@@ -88,7 +87,7 @@ it('shows the plane icon when >= 5 characters in Input', () => {
   wrapped = mount(
     <PlaneButton
       formContent="12345"
-      submitFlightCode={jest.fn()}
+      submitFlightCode={null}
       loadingMessage="loading message"
       error={null}
     />

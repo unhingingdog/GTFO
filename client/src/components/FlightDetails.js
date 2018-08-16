@@ -53,9 +53,9 @@ export class FlightDetails extends Component {
 
     return(
       <div id="flight-details-container">
-        <h1>{flight}</h1>
-        <p>{originCity} to {destinationCity} - {date}</p>
-        <p>departs: {departureTime}</p>
+        <h1 id="fd-flight-number">{flight}</h1>
+        <p id="fd-flight-details">{originCity} to {destinationCity} - {date}</p>
+        <p id="fd-departure-time">departs: {departureTime}</p>
         <br />
         <div className="slider-container">
           <Slider
@@ -63,14 +63,25 @@ export class FlightDetails extends Component {
           />
         </div>
         <br />
-        <p>Arrive at gate: {arriveAtGateTime}</p>
-        <p>checkin and baggage drop close: {checkinAndBaggageDropCloseTime}</p>
-        <p>Check in and baggage open: {checkInAndBaggageOpenTime}</p>
-        <p>Gate closes: {gateCloseTime}</p>
-
-        <p>Leave to arrive at gate: {leaveforArriveAtGate}</p>
-        <p>Leave to arrive before bag drop closes: {leaveForcheckInAndBagDropClose}</p>
-        <p>Leave to arrive before gate closes: {leaveForGateClosed}</p>
+        <p id="fd-arrive-at-gate-time">Arrive at gate: {arriveAtGateTime}</p>
+        <p id="fd-check-in-and-baggage-drop-close-time">
+          checkin and baggage drop close: {checkinAndBaggageDropCloseTime}
+        </p>
+        <p id="fd-check-in-and-baggage-open-time">
+          Check in and baggage open: {checkInAndBaggageOpenTime}
+        </p>
+        <p id="fd-gate-close-time">
+          Gate closes: {gateCloseTime}
+        </p>
+        <p id="fd-leave-for-arrive-at-gate">
+          Leave to arrive at gate: {leaveforArriveAtGate}
+        </p>
+        <p id="fd-leave-for-check-in-and-bag-drop-close">
+        Leave to arrive before bag drop closes: {leaveForcheckInAndBagDropClose}
+        </p>
+        <p id="fd-leave-for-gate-closed">
+          Leave to arrive before gate closes: {leaveForGateClosed}
+        </p>
       </div>
     )
   }

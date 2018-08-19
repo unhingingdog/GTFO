@@ -34,7 +34,7 @@ let checkInAndBagDropOpen
 let checkInAndBagDropClose
 let gateClosed
 let leaveForcheckInAndBagDropClose
-let leaveForGateClosed
+let leaveAt
 
 beforeEach(() => {
   wrapped = mount(
@@ -53,8 +53,8 @@ beforeEach(() => {
   gateClosed = wrapped.find("#fd-gate-close-time").text()
   arriveAtGate = wrapped.find("#fd-leave-for-arrive-at-gate").text()
   leaveForcheckInAndBagDropClose =
-  wrapped.find("#fd-leave-for-check-in-and-bag-drop-close").text()
-  leaveForGateClosed = wrapped.find("#fd-leave-for-gate-closed").text()
+    wrapped.find("#fd-leave-for-check-in-and-bag-drop-close").text()
+  leaveAt = wrapped.find("#fd-leave-at").text()
 })
 
 afterEach(() => wrapped.unmount())
@@ -76,6 +76,5 @@ it('Shows the correct initial flight details/times', () => {
     .to.equal('Leave to arrive at gate: 11:48:00 GMT+1200 (New Zealand Daylight Time)')
   expect(leaveForcheckInAndBagDropClose)
     .to.equal('Leave to arrive before bag drop closes: 12:08:00 GMT+1200 (New Zealand Standard Time)')
-  expect(leaveForGateClosed)
-    .to.equal('Leave to arrive before gate closes: 11:28:00 GMT+1200 (New Zealand Daylight Time)')
+  expect(leaveAt).to.equal('Leave at 11:48:00 GMT+1200 (New Zealand Daylight Time)')
 })

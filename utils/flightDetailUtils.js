@@ -43,11 +43,15 @@ const airportDistanceInfo = async (
   currentLongitude,
   navigationProvider
 ) => {
+
   return Promise.all([
     navigationProvider.getGeocode(airportCode),
     navigationProvider.getReverseGeocode([currentLatitude, currentLongitude])
   ])
-  .then(results => navigationProvider.getDistance(results[0], results[1]))
+  .then(results => {
+    console.log(results)
+    navigationProvider.getDistance(results[0], results[1]))
+  }
   .catch(error => console.log(error))
 }
 

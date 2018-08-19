@@ -95,7 +95,9 @@ export class FlightInput extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault()
-    this.submitFlightCode()
+    if (this.props.currentLatitude && this.state.formContent.length >= 4) {
+      this.submitFlightCode()
+    }
   }
 
   getGeolocation = () => {
@@ -112,7 +114,7 @@ export class FlightInput extends Component {
       history
     } = this.props
 
-    startLoading('Where you at?')
+    startLoading('Getting your location')
     this.getGeolocation()
       .then(result => {
         console.log(result)

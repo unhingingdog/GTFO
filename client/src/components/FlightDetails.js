@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import Map from './Map'
 
 export class FlightDetails extends Component {
   constructor(props) {
@@ -32,13 +33,6 @@ export class FlightDetails extends Component {
 
     const { extraTime } = this.state
 
-    const leaveforArriveAtGate =
-      new Date((departure - arriveAtGate - duration) * 1000).toTimeString()
-
-    const leaveForcheckInAndBagDropClose =
-      new Date((departure - checkInAndBagDropClose - duration) * 1000)
-        .toTimeString()
-
     const date = new Date((departure) * 1000).toDateString()
 
     const departureTime = new Date((departure) * 1000).toTimeString()
@@ -67,27 +61,27 @@ export class FlightDetails extends Component {
           style: {
             color: 'white',
           },
-          label: "Departs"
+          label: `Departs at ${departureTime.split(':').splice(0,2).join(':')}`
         },
         [gateClosed]: {
           style: {
             color: 'white',
             marginTop: -34
           },
-          label: "Gate Closes"
+          label: `Gate closes at ${gateCloseTime.split(':').splice(0,2).join(':')}`
         },
         [arriveAtGate]: {
           style: {
             color: 'white'
           },
-          label: "Arrive at gate"
+          label: `Arrive at gate at ${arriveAtGateTime.split(':').splice(0,2).join(':')}`
         },
         [checkInAndBagDropClose]: {
           style: {
             color: 'white',
             marginTop: -34
           },
-          label: "check in/bag drop close"
+          label: `Check-in/bag-drop close at ${checkinAndBaggageDropCloseTime.split(':').splice(0,2).join(':')}`
         },
         [checkInAndBagDropClose + 1800]: {
           style: {
@@ -100,29 +94,36 @@ export class FlightDetails extends Component {
       const placeHolderSlidermarkers = {
         0: {
           style: {
-            color: 'white',
+            color: 'white'
           },
-          label: "Departs"
+          label: `Departs at ${departureTime.split(':').splice(0,2).join(':')}`
         },
         900: {
           style: {
             color: 'white',
             marginTop: -34
           },
-          label: "Gate Closes"
+          label: `Gate closes at ${
+                    gateCloseTime.split(':').splice(0,2).join(':')
+                  }`
         },
         2376: {
           style: {
             color: 'white'
           },
-          label: "Arrive at gate"
+          label: `Arrive at gate at ${
+                    arriveAtGateTime.split(':').splice(0,2).join(':')
+                  }`
         },
         2700: {
           style: {
             color: 'white',
             marginTop: -34
           },
-          label: "check in/bag drop close"
+          label: `Check-in/bag-drop close at
+                  ${checkinAndBaggageDropCloseTime
+                    .split(':').splice(0,2).join(':')
+                  }`
         },
         [2700 + 1800]: {
           style: {
@@ -130,9 +131,7 @@ export class FlightDetails extends Component {
           },
           label: "extra time"
         }
-      }
-
-      console.log(extraTime)
+    }
 
     return(
       <div id="flight-details-container">
@@ -162,7 +161,14 @@ export class FlightDetails extends Component {
           </div>
         </section>
         <section id="fd-map">
-
+          <Map
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            userLocation={[this.props.currentLatitude, this.props.currentLongitude]}
+          />
         </section>
       </div>
     )

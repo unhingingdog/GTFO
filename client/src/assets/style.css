@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #container {
   background-color: #d80404;
   display: grid;
@@ -124,13 +129,12 @@ input[type="text"] {
 /* FlightDetails */
 
 #flight-details-container {
-  height: 100vh;
-  width: 100vw;
   background-color: #d80404;
   color: white;
   display: flex;
   flex-direction: column;
   font-family: 'Oxygen', sans-serif;
+  align-items: center;
 }
 
 #fd-details-and-slider {
@@ -138,7 +142,8 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 0 100px 0;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 #fd-details-and-slider > p {
@@ -169,8 +174,8 @@ input[type="text"] {
 }
 
 #fd-map {
+  height: '50vh';
   width: 100vw;
-  height: 40vw;
 }
 
 

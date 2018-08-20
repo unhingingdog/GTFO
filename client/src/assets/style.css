@@ -128,46 +128,49 @@ input[type="text"] {
   width: 100vw;
   background-color: #d80404;
   color: white;
-  display: grid;
-  grid-template-areas: "fd-flight&route"  "fd-leavetime-slider"
-                       "fd-other-details" "fd-map";
-  grid-template-columns:  1fr;
-  grid-auto-rows: repeat(3, 33vh);
+  display: flex;
+  flex-direction: column;
   font-family: 'Oxygen', sans-serif;
 }
 
-#fd-title {
-  grid-area: "fd-flight&route";
+#fd-details-and-slider {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 0px;
+  padding: 100px 0 100px 0;
 }
 
-#fd-flight-number {
-  font-size: 110px;
+#fd-details-and-slider > p {
+  font-size: 20px;
+}
+
+#fd-leave-at {
+  margin-top: 0px;
+  font-size: 80px;
   line-height: 0px;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+#fd-mins-before {
+  margin-top: -5px;
+  font-family: 'Do Hyeon', sans-serif;
 }
 
 #fd-flight-details {
   line-height: 0px;
+  padding-bottom: 50px;
+  font-family: 'Do Hyeon', sans-serif;
 }
 
 .slider-container {
-  width: 50vw;
-}
-
-#fd-leavetime-slider {
-  grid-area: "fd-leavetime-slider";
-}
-
-#fd-other-details {
-  grid-area: "fd-other-details"
+  width: 85vw;
+  padding: 40px 0 40px 0;
 }
 
 #fd-map {
-  grid-area: "fd-map";
+  width: 100vw;
+  height: 40vw;
 }
 
 

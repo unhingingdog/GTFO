@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CircularSlider from 'react-circular-slider-bar'
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
 
 export class FlightDetails extends Component {
   constructor(props) {
@@ -9,6 +10,11 @@ export class FlightDetails extends Component {
     this.state = {
       extraTime: 0
     }
+  }
+
+  componentDidMount() {
+    const extraTime = (this.props.arriveAtGate || 2376) + 900
+    this.setState({ extraTime })
   }
 
   render() {
@@ -23,6 +29,8 @@ export class FlightDetails extends Component {
       gateClosed,
       duration
     } = this.props
+
+    const { extraTime } = this.state
 
     const leaveforArriveAtGate =
       new Date((departure - arriveAtGate - duration) * 1000).toTimeString()
@@ -50,57 +58,109 @@ export class FlightDetails extends Component {
     const leaveAt =
       new Date((
         departure -
-        arriveAtGate -
         duration -
         (this.state.extraTime)
       ) * 1000).toTimeString()
 
+      const sliderMarkers = {
+        0: {
+          style: {
+            color: 'white',
+          },
+          label: "Departs"
+        },
+        [gateClosed]: {
+          style: {
+            color: 'white',
+            marginTop: -34
+          },
+          label: "Gate Closes"
+        },
+        [arriveAtGate]: {
+          style: {
+            color: 'white'
+          },
+          label: "Arrive at gate"
+        },
+        [checkInAndBagDropClose]: {
+          style: {
+            color: 'white',
+            marginTop: -34
+          },
+          label: "check in/bag drop close"
+        },
+        [checkInAndBagDropClose + 1800]: {
+          style: {
+            color: 'white'
+          },
+          label: "extra time"
+        }
+      }
+
+      const placeHolderSlidermarkers = {
+        0: {
+          style: {
+            color: 'white',
+          },
+          label: "Departs"
+        },
+        900: {
+          style: {
+            color: 'white',
+            marginTop: -34
+          },
+          label: "Gate Closes"
+        },
+        2376: {
+          style: {
+            color: 'white'
+          },
+          label: "Arrive at gate"
+        },
+        2700: {
+          style: {
+            color: 'white',
+            marginTop: -34
+          },
+          label: "check in/bag drop close"
+        },
+        [2700 + 1800]: {
+          style: {
+            color: 'white'
+          },
+          label: "extra time"
+        }
+      }
+
+      console.log(extraTime)
+
     return(
       <div id="flight-details-container">
-        <section id="fd-title">
-          <h1 id="fd-flight-number">{flight || 'EG123'}</h1>
+        <section id="fd-details-and-slider">
           <p id="fd-flight-details">
             {originCity || 'originCity'} to
             {' ' + destinationCity + ' ' || 'destinationCity'} on
             {' ' + date}
+            <span id="fd-flight-number">{` (${flight || 'EG123'})`}</span>
           </p>
-        </section>
-
-        <section id="fd-leavetime-slider">
+          <h2 id="fd-leave-at">
+            Leave at {leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}
+          </h2>
+          <p id="fd-mins-before">
+            To arrive {Math.floor(extraTime / 60)} minutes before departure
+            with a {Math.ceil(duration / 60)} drive to the airport.
+          </p>
           <div className="slider-container">
-            <CircularSlider
-              r={150}
-              value={this.state.extraTime}
-              trackWidth={10}
-              thumbWidth={15}
-              trackColor="white"
-              onChange={value => this.setState({ extraTime: Math.ceil(value) })}
+            <Slider
+              max={(checkInAndBagDropClose || 2700) + 1800}
+              min={0}
+              step={60}
+              marks={flight ? sliderMarkers : placeHolderSlidermarkers}
+              value={extraTime}
+              onChange={value => this.setState({ extraTime: value })}
             />
-            <h2 id="fd-leave-at">Leave at {leaveAt}</h2>
-            <p>{this.state.extraTime} minutes</p>
           </div>
         </section>
-
-        <section id="fd-other-details">
-          <p id="fd-departure-time">departs: {departureTime}</p>
-          <p id="fd-arrive-at-gate-time">Arrive at gate: {arriveAtGateTime}</p>
-          <p id="fd-check-in-and-baggage-drop-close-time">
-            checkin and baggage drop close: {checkinAndBaggageDropCloseTime}
-          </p>
-          <p id="fd-check-in-and-baggage-open-time">
-            Check in and baggage open: {checkInAndBaggageOpenTime}
-          </p>
-          <p id="fd-gate-close-time">
-            Gate closes: {gateCloseTime}
-          </p>
-          <p id="fd-leave-for-arrive-at-gate">
-            Leave to arrive at gate: {leaveforArriveAtGate}
-          </p>
-          <p id="fd-leave-for-check-in-and-bag-drop-close">
-          Leave to arrive before bag drop closes: {leaveForcheckInAndBagDropClose}
-          </p>
-        </section>
-
         <section id="fd-map">
 
         </section>

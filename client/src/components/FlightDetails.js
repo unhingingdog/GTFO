@@ -56,80 +56,80 @@ export class FlightDetails extends Component {
         (this.state.extraTime)
       ) * 1000).toTimeString()
 
+      const mobileStyle = {
+        topLabel: {
+          position: 'absolute',
+          color: 'white',
+          transform: 'rotate(45deg)',
+          textAlign: 'left',
+          top: 58,
+          padding: 0,
+          marginLeft: -15,
+          width: 180
+
+        },
+        bottomLabel: {
+          position: 'absolute',
+          color: 'white',
+          transform: 'rotate(45deg)',
+          textAlign: 'left',
+          top: 58,
+          padding: 0,
+          marginLeft: -15,
+          width: 180
+        },
+        handle: { width: 23, height: 23, top: -0.5 },
+        dot: { width: 15, height: 15, top: -5 }
+      }
+
+      const desktopStyle = {
+        topLabel: { color: 'white', top: -42, },
+        bottomLabel: { color: 'white', bottom: -20 },
+        handle: { width: 20, height: 20, top: 1 },
+        dot: { width: 12, height: 12, top: -4 }
+      }
+
+      const isMobile = window.innerWidth < 800
+      const viewMode = isMobile ? mobileStyle : desktopStyle
+
       const sliderMarkers = {
         0: {
-          style: {
-            color: 'white',
-          },
+          style: viewMode.bottomLabel,
           label: `Departs at ${departureTime.split(':').splice(0,2).join(':')}`
         },
         [gateClosed]: {
-          style: {
-            color: 'white',
-            marginTop: -34
-          },
-          label: `Gate closes at ${gateCloseTime.split(':').splice(0,2).join(':')}`
+          style: viewMode.topLabel,
+          label: `Gate closes at
+            ${gateCloseTime.split(':').splice(0,2).join(':')}`
         },
         [arriveAtGate]: {
-          style: {
-            color: 'white'
-          },
-          label: `Arrive at gate at ${arriveAtGateTime.split(':').splice(0,2).join(':')}`
+          style: viewMode.bottomLabel,
+          label: `Arrive at gate
+            ${arriveAtGateTime.split(':').splice(0,2).join(':')}`
         },
         [checkInAndBagDropClose]: {
-          style: {
-            color: 'white',
-            marginTop: -34
-          },
-          label: `Check-in/bag-drop close at ${checkinAndBaggageDropCloseTime.split(':').splice(0,2).join(':')}`
+          style: viewMode.topLabel,
+          label: `Check-in/bag-drop close at
+            ${checkinAndBaggageDropCloseTime.split(':').splice(0,2).join(':')}`
         },
-        [checkInAndBagDropClose + 1800]: {
-          style: {
-            color: 'white'
-          },
-          label: "extra time"
-        }
       }
 
       const placeHolderSlidermarkers = {
         0: {
-          style: {
-            color: 'white'
-          },
-          label: `Departs at ${departureTime.split(':').splice(0,2).join(':')}`
+          style: viewMode.bottomLabel,
+          label: `Departs (1:00)`
         },
         900: {
-          style: {
-            color: 'white',
-            marginTop: -34
-          },
-          label: `Gate closes at ${
-                    gateCloseTime.split(':').splice(0,2).join(':')
-                  }`
+          style: viewMode.topLabel,
+          label: `Gate closes (12:30)`
         },
         2376: {
-          style: {
-            color: 'white'
-          },
-          label: `Arrive at gate at ${
-                    arriveAtGateTime.split(':').splice(0,2).join(':')
-                  }`
+          style: viewMode.bottomLabel,
+          label: `Arrive at gate (12:00)`
         },
         2700: {
-          style: {
-            color: 'white',
-            marginTop: -34
-          },
-          label: `Check-in/bag-drop close at
-                  ${checkinAndBaggageDropCloseTime
-                    .split(':').splice(0,2).join(':')
-                  }`
-        },
-        [2700 + 1800]: {
-          style: {
-            color: 'white'
-          },
-          label: "extra time"
+          style: viewMode.topLabel,
+          label: `Check-in/bag-drop close (11:55)`
         }
     }
 
@@ -147,7 +147,7 @@ export class FlightDetails extends Component {
           </h2>
           <p id="fd-mins-before">
             To arrive {Math.floor(extraTime / 60)} minutes before departure
-            with a {Math.ceil(duration / 60)} drive to the airport.
+            with a {Math.ceil(duration / 60)} minute drive to the airport.
           </p>
           <div className="slider-container">
             <Slider
@@ -157,6 +157,8 @@ export class FlightDetails extends Component {
               marks={flight ? sliderMarkers : placeHolderSlidermarkers}
               value={extraTime}
               onChange={value => this.setState({ extraTime: value })}
+              handleStyle={viewMode.handle}
+              dotStyle={viewMode.dot}
             />
           </div>
         </section>

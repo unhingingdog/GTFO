@@ -174,7 +174,6 @@ input[type="text"] {
 }
 
 #fd-map {
-  height: '50vh';
   width: 100vw;
 }
 
@@ -206,5 +205,59 @@ input[type="text"] {
     width: 100px;
     height: 100px;
     color: #feffea;
+  }
+
+  /* FlightDetails */
+
+  #flight-details-container {
+    background-color: #d80404;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Oxygen', sans-serif;
+    align-items: center;
+  }
+
+  #fd-details-and-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding: 70px 10px 120px 10px;
+  }
+
+  #fd-details-and-slider > p {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  #fd-leave-at {
+    margin-top: 0px;
+    font-size: 47px;
+    line-height: 0px;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+
+  #fd-mins-before {
+    margin-top: -5px;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+
+  #fd-flight-details {
+    line-height: 0px;
+    padding-bottom: 50px;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+
+  .slider-container {
+    width: 85vw;
+    padding: 40px 0 40px 0;
+  }
+
+  #fd-map {
+    height: 100vw;
+    width: 100vw;
   }
 }

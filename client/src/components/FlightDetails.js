@@ -139,8 +139,7 @@ export class FlightDetails extends Component {
           <p id="fd-flight-details">
             {originCity || 'originCity'} to
             {' ' + destinationCity + ' ' || 'destinationCity'} on
-            {' ' + date}
-            <span id="fd-flight-number">{` (${flight || 'EG123'})`}</span>
+            {' ' + date} + {` (${flight || 'EG123'})`}
           </p>
           <h2 id="fd-leave-at">
             Leave at {leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}

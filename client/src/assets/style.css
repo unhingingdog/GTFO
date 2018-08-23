@@ -151,6 +151,7 @@ input[type="text"] {
 
 #fd-details-and-slider > p {
   font-size: 20px;
+  background-color: yellow;
 }
 
 #fd-leave-at {

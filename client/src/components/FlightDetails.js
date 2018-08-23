@@ -33,21 +33,21 @@ export class FlightDetails extends Component {
 
     const { extraTime } = this.state
 
-    const date = new Date((departure) * 1000).toDateString()
+    const date = new Date((departure) * 1000).toDateString().trim()
 
-    const departureTime = new Date((departure) * 1000).toTimeString()
+    const departureTime = new Date((departure) * 1000).toTimeString().trim()
 
     const arriveAtGateTime = new Date((departure - arriveAtGate) * 1000)
-      .toTimeString()
+      .toTimeString().trim()
 
     const checkinAndBaggageDropCloseTime =
-      new Date((departure - checkInAndBagDropClose) * 1000).toTimeString()
+      new Date((departure - checkInAndBagDropClose) * 1000).toTimeString().trim()
 
     const checkInAndBaggageOpenTime =
-      new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString()
+      new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString().trim()
 
     const gateCloseTime = new Date((departure - gateClosed) * 1000)
-      .toTimeString()
+      .toTimeString().trim()
 
     const leaveAt =
       new Date((
@@ -143,11 +143,11 @@ export class FlightDetails extends Component {
             <span id="fd-flight-number">{` (${flight || 'EG123'})`}</span>
           </p>
           <h2 id="fd-leave-at">
-            Leave at {this.shortenTimeString(leaveAt)}
+            Leave at {leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}
           </h2>
           <p id="fd-mins-before">
-            To arrive {Math.floor(extraTime / 60).toString().trim()} minutes before
-            departure with a {Math.ceil(duration / 60).toString().trim()} minute drive
+            To arrive {Math.floor(extraTime / 60)} minutes before
+            departure with a {Math.ceil(duration / 60)} minute drive
             to the airport.
           </p>
           <div className="slider-container">
@@ -176,9 +176,6 @@ export class FlightDetails extends Component {
       </div>
     )
   }
-
-  shortenTimeString = timeString =>
-    timeString.trim().split(' ')[0].split(':').splice(0,2).join(':')
 }
 
 const mapStateToProps = state => {

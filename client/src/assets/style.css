@@ -231,18 +231,18 @@ input[type="text"] {
     margin-top: 0px;
     font-size: 47px;
     line-height: 0px;
-    font-family: sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
   }
 
   #fd-mins-before {
     margin-top: -5px;
-    font-family: sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
   }
 
   #fd-flight-details {
     line-height: 0px;
     padding-bottom: 50px;
-    font-family: sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
   }
 
   .slider-container {

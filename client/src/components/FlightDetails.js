@@ -177,9 +177,8 @@ export class FlightDetails extends Component {
     )
   }
 
-  shortenTimeString = timeString => {
+  shortenTimeString = timeString =>
     timeString.trim().split(' ')[0].split(':').splice(0,2).join(':')
-  }
 }
 
 const mapStateToProps = state => {

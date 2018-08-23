@@ -146,8 +146,9 @@ export class FlightDetails extends Component {
             Leave at {this.shortenTimeString(leaveAt)}
           </h2>
           <p id="fd-mins-before">
-            `To arrive ${Math.floor(extraTime / 60)} minutes before departure
-            with a ${Math.ceil(duration / 60)} minute drive to the airport.`
+            To arrive {Math.floor(extraTime / 60).toString()} minutes before
+            departure with a {Math.ceil(duration / 60).toString()} minute drive
+            to the airport.
           </p>
           <div className="slider-container">
             <Slider

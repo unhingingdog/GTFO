@@ -137,17 +137,17 @@ export class FlightDetails extends Component {
       <div id="flight-details-container">
         <section id="fd-details-and-slider">
           <p id="fd-flight-details">
-            {originCity || 'originCity'} to
-            {' ' + destinationCity + ' ' || 'destinationCity'} on
-            {' ' + date} + {` (${flight || 'EG123'})`}
+            {`${(originCity || 'originCity')} to
+            ${destinationCity || 'destinationCity'} on
+            ${' ' + date} (${flight || 'EG123'})`}
           </p>
           <h2 id="fd-leave-at">
             Leave at {leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}
           </h2>
           <p id="fd-mins-before">
-            To arrive {Math.floor(extraTime / 60)} minutes before
-            departure with a {Math.ceil(duration / 60)} minute drive
-            to the airport.
+            {`To arrive ${Math.floor(extraTime / 60)} minutes before
+            departure with a ${Math.ceil(duration / 60)} minute drive
+            to the airport.`}
           </p>
           <div className="slider-container">
             <Slider

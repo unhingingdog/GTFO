@@ -196,7 +196,7 @@ input[type="text"] {
   }
 
   .flight-input-message {
-    font-family: 'Oxygen', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     color: #feffea;
     font-size: 20px;
     position: absolute;
@@ -211,15 +211,6 @@ input[type="text"] {
   }
 
   /* FlightDetails */
-
-  #flight-details-container {
-    background-color: #d80404;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Oxygen', sans-serif;
-    align-items: center;
-  }
 
   #fd-details-and-slider {
     display: flex;
@@ -240,18 +231,18 @@ input[type="text"] {
     margin-top: 0px;
     font-size: 47px;
     line-height: 0px;
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: sans-serif;
   }
 
   #fd-mins-before {
     margin-top: -5px;
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: sans-serif;
   }
 
   #fd-flight-details {
     line-height: 0px;
     padding-bottom: 50px;
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: sans-serif;
   }
 
   .slider-container {

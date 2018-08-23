@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  -webkit-text-size-adjust: none;
 }
 
 #container {
@@ -225,12 +224,14 @@ input[type="text"] {
 
   #fd-details-and-slider > p {
     font-size: 16px;
+    text-align: center;
   }
 
   #fd-leave-at {
     margin-top: 0px;
     font-size: 47px;
     font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
   }
 
   #fd-mins-before {

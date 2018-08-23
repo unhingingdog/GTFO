@@ -107,7 +107,7 @@ input[type="text"] {
 }
 
 .flight-input-message {
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Do Hyeon', sans-serif;
   color: #feffea;
   font-size: 30px;
   position: absolute;
@@ -118,12 +118,15 @@ input[type="text"] {
 
 #no-location-container {
   display: flex;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 40px;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
   color: white;
-  background-color: red;
+  background: #d80404;
+  padding: 30px;
 }
 
 /* FlightDetails */

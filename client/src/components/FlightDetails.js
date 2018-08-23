@@ -143,11 +143,11 @@ export class FlightDetails extends Component {
             <span id="fd-flight-number">{` (${flight || 'EG123'})`}</span>
           </p>
           <h2 id="fd-leave-at">
-            Leave at {leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}
+            Leave at {this.shortenTimeString(leaveAt)}
           </h2>
           <p id="fd-mins-before">
-            To arrive {Math.floor(extraTime / 60)} minutes before departure
-            with a {Math.ceil(duration / 60)} minute drive to the airport.
+            `To arrive ${Math.floor(extraTime / 60)} minutes before departure
+            with a ${Math.ceil(duration / 60)} minute drive to the airport.`
           </p>
           <div className="slider-container">
             <Slider
@@ -174,6 +174,10 @@ export class FlightDetails extends Component {
         </section>
       </div>
     )
+  }
+
+  shortenTimeString = timeString => {
+    timeString.trim().split(' ')[0].split(':').splice(0,2).join(':')
   }
 }
 

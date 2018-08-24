@@ -203,7 +203,7 @@ const desktopStyles = {
   },
   flightSummary: {
     paddingBottom: '50px',
-    fontFamily: 'Do Hyeon, sans-serif'
+    fontFamily: 'sans-serif'
   },
   sliderContainer: {
     width: '85vw',

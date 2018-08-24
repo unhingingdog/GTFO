@@ -56,59 +56,27 @@ export class FlightDetails extends Component {
         (this.state.extraTime)
       ) * 1000).toTimeString()
 
-      const mobileStyle = {
-        topLabel: {
-          position: 'absolute',
-          color: 'white',
-          transform: 'rotate(45deg)',
-          textAlign: 'left',
-          top: 58,
-          padding: 0,
-          marginLeft: -15,
-          width: 180
-
-        },
-        bottomLabel: {
-          position: 'absolute',
-          color: 'white',
-          transform: 'rotate(45deg)',
-          textAlign: 'left',
-          top: 58,
-          padding: 0,
-          marginLeft: -15,
-          width: 180
-        },
-        handle: { width: 23, height: 23, top: -0.5 },
-        dot: { width: 15, height: 15, top: -5 }
-      }
-
-      const desktopStyle = {
-        topLabel: { color: 'white', top: -42, },
-        bottomLabel: { color: 'white', bottom: -20 },
-        handle: { width: 20, height: 20, top: 1 },
-        dot: { width: 12, height: 12, top: -4 }
-      }
-
       const isMobile = window.innerWidth < 800
-      const viewMode = isMobile ? mobileStyle : desktopStyle
+      const styles = isMobile ? mobileStyles : desktopStyles
+
 
       const sliderMarkers = {
         0: {
-          style: viewMode.bottomLabel,
+          style: styles.bottomLabel,
           label: `Departs at ${departureTime.split(':').splice(0,2).join(':')}`
         },
         [gateClosed]: {
-          style: viewMode.topLabel,
+          style: styles.topLabel,
           label: `Gate closes at
             ${gateCloseTime.split(':').splice(0,2).join(':')}`
         },
         [arriveAtGate]: {
-          style: viewMode.bottomLabel,
+          style: styles.bottomLabel,
           label: `Arrive at gate
             ${arriveAtGateTime.split(':').splice(0,2).join(':')}`
         },
         [checkInAndBagDropClose]: {
-          style: viewMode.topLabel,
+          style: styles.topLabel,
           label: `Check-in/bag-drop close at
             ${checkinAndBaggageDropCloseTime.split(':').splice(0,2).join(':')}`
         },
@@ -116,41 +84,37 @@ export class FlightDetails extends Component {
 
       const placeHolderSlidermarkers = {
         0: {
-          style: viewMode.bottomLabel,
+          style: styles.bottomLabel,
           label: `Departs (1:00)`
         },
         900: {
-          style: viewMode.topLabel,
+          style: styles.topLabel,
           label: `Gate closes (12:30)`
         },
         2376: {
-          style: viewMode.bottomLabel,
+          style: styles.bottomLabel,
           label: `Arrive at gate (12:00)`
         },
         2700: {
-          style: viewMode.topLabel,
+          style: styles.topLabel,
           label: `Check-in/bag-drop close (11:55)`
         }
     }
 
     return(
-      <div id="flight-details-container">
-        <section id="fd-details-and-slider">
+      <div style={styles.container}>
+        <section style={styles.topContainer}>
           <p id="fd-flight-details">
             {(originCity || 'originCity')} to {destinationCity || 'destinationCity'} on {flightDate}
           </p>
-          <h2 id="fd-leave-at">
+          <h2 style={styles.leaveAt}>
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}
           </h2>
-          <div id="fd-mins-before">
-            <p>
+          <p style={styles.tripDetails}>
               To arrive {Math.floor(extraTime / 60)} minutes before departure
-            </p>
-            <p>
               with a {Math.ceil(duration / 60)} minute drive to the airport.
-            </p>
-          </div>
-          <div className="slider-container">
+          </p>
+          <div style={styles.sliderContainer}>
             <Slider
               max={(checkInAndBagDropClose || 2700) + 1800}
               min={0}
@@ -158,12 +122,12 @@ export class FlightDetails extends Component {
               marks={flight ? sliderMarkers : placeHolderSlidermarkers}
               value={extraTime}
               onChange={value => this.setState({ extraTime: value })}
-              handleStyle={viewMode.handle}
-              dotStyle={viewMode.dot}
+              handleStyle={styles.handle}
+              dotStyle={styles.dot}
             />
           </div>
         </section>
-        <section id="fd-map">
+        <section style={styles.mapContainer}>
           <Map
             isMarkerShown
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -199,3 +163,155 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {})(FlightDetails)
+
+const desktopStyles = {
+  container: {
+    backgroundColor: '#d80404',
+    color: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  topContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: '100px',
+    paddingBottom: '100px',
+    padding: '70px 10px 120px 10px',
+    fontSize: '16px',
+    textAlign: 'center',
+    textOverflow: 'clip'
+  },
+  leaveAt: {
+    marginTop: '0px',
+    fontSize: '42px',
+    fontFamily: 'Do Hyeon',
+    textAlign: 'center',
+    textOverflow: 'ellipsis',
+    width: '100%'
+  },
+  tripDetails: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '-5px',
+    fontFamily: 'Do Hyeon, sans-serif',
+    textAlign: 'center',
+    width: '100%'
+  },
+  flightSummary: {
+    paddingBottom: '50px',
+    fontFamily: 'Do Hyeon, sans-serif'
+  },
+  sliderContainer: {
+    width: '85vw',
+    padding: '40px 0 40px 0',
+    fontFamily: 'Oxygen, sans-serif'
+  },
+  mapContainer: {
+    width: '100vw'
+  },
+  topLabel: {
+    color: 'white',
+    top: -42
+  },
+  bottomLabel: {
+    color: 'white',
+    bottom: -20
+  },
+  handle: {
+    width: 20,
+    height: 20,
+    top: 1
+  },
+  dot: {
+    width: 12,
+    height: 12,
+    top: -4
+  }
+}
+
+const mobileStyles = {
+  container: {
+    backgroundColor: '#d80404',
+    color: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  topContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: '100px',
+    paddingBottom: '100px',
+    padding: '70px 10px 120px 10px',
+    fontSize: '16px',
+    textAlign: 'center',
+    textOverflow: 'clip'
+  },
+  leaveAt: {
+    marginTop: '0px',
+    fontSize: '42px',
+    fontFamily: 'Do Hyeon',
+    textAlign: 'center',
+    textOverflow: 'ellipsis',
+    width: '100%'
+  },
+  tripDetails: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '-5px',
+    fontFamily: 'Do Hyeon, sans-serif',
+    textAlign: 'center',
+    width: '100%'
+  },
+  flightSummary: {
+    paddingBottom: '50px',
+    fontFamily: 'Do Hyeon, sans-serif'
+  },
+  sliderContainer: {
+    width: '85vw',
+    padding: '40px 0 40px 0',
+    fontFamily: 'Oxygen, sans-serif'
+  },
+  mapContainer: {
+    height: '100vw',
+    width: '100vw'
+  },
+  topLabel: {
+    position: 'absolute',
+    color: 'white',
+    transform: 'rotate(45deg)',
+    textAlign: 'left',
+    top: 58,
+    padding: 0,
+    marginLeft: -15,
+    width: 180
+
+  },
+  bottomLabel: {
+    position: 'absolute',
+    color: 'white',
+    transform: 'rotate(45deg)',
+    textAlign: 'left',
+    top: 58,
+    padding: 0,
+    marginLeft: -15,
+    width: 180
+  },
+  handle: {
+    width: 23,
+    height: 23,
+    top: -0.5
+  },
+  dot: {
+    width: 15,
+    height: 15,
+    top: -5
+  }
+}

@@ -142,9 +142,14 @@ export class FlightDetails extends Component {
           <h2 id="fd-leave-at">
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}
           </h2>
-          <p id="fd-mins-before">
-            {`To arrive ${Math.floor(extraTime / 60)} minutes before departure with a ${Math.ceil(duration / 60)} minute drive to the airport.`}
-          </p>
+          <div id="fd-mins-before">
+            <p>
+              To arrive {Math.floor(extraTime / 60)} minutes before departure
+            </p>
+            <p>
+              with a {Math.ceil(duration / 60)} minute drive to the airport.
+            </p>
+          </div>
           <div className="slider-container">
             <Slider
               max={(checkInAndBagDropClose || 2700) + 1800}

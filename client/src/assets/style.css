@@ -241,6 +241,9 @@ input[type="text"] {
   }
 
   #fd-mins-before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: -5px;
     font-family: 'Do Hyeon', sans-serif;
     text-align: center;

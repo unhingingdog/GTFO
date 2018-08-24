@@ -162,6 +162,10 @@ input[type="text"] {
   width: 100%;
 }
 
+#fd-leave-at > p {
+  display: inline;
+}
+
 #fd-mins-before {
   margin-top: -5px;
   font-family: 'Do Hyeon', sans-serif;
@@ -249,6 +253,10 @@ input[type="text"] {
     text-align: center;
     width: 100%;
     line-height: 2px;
+  }
+
+  #fd-leave-at > p {
+    display: block;
   }
 
   #fd-flight-details {

@@ -33,7 +33,7 @@ export class FlightDetails extends Component {
 
     const { extraTime } = this.state
 
-    const date = new Date((departure) * 1000).toDateString().trim()
+    const flightDate = new Date((departure) * 1000).toDateString().trim()
 
     const departureTime = new Date((departure) * 1000).toTimeString().trim()
 
@@ -137,7 +137,7 @@ export class FlightDetails extends Component {
       <div id="flight-details-container">
         <section id="fd-details-and-slider">
           <p id="fd-flight-details">
-            {(originCity || 'originCity')} to {destinationCity || 'destinationCity'} on {date.toString().trim()}
+            {(originCity || 'originCity')} to {destinationCity || 'destinationCity'} on {flightDate}
           </p>
           <h2 id="fd-leave-at">
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}

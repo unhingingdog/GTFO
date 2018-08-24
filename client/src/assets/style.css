@@ -213,10 +213,6 @@ input[type="text"] {
   /* FlightDetails */
 
   #fd-details-and-slider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding-top: 100px;
     padding-bottom: 100px;
     padding: 70px 10px 120px 10px;

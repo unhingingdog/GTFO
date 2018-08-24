@@ -234,6 +234,7 @@ input[type="text"] {
     font-family: 'Do Hyeon', sans-serif;
     text-align: center;
     text-overflow: ellipsis;
+    background: orange;
   }
 
   #fd-mins-before {

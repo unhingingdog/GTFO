@@ -239,7 +239,9 @@ const mobileStyles = {
     color: 'white',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden',
+    textOverflow: 'clip'
   },
   topContainer: {
     display: 'flex',
@@ -250,8 +252,7 @@ const mobileStyles = {
     paddingBottom: '100px',
     padding: '70px 10px 120px 10px',
     fontSize: '16px',
-    textAlign: 'center',
-    textOverflow: 'clip'
+    textAlign: 'center'
   },
   leaveAt: {
     marginTop: '0px',
@@ -265,7 +266,6 @@ const mobileStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '-5px',
     fontFamily: 'Do Hyeon, sans-serif',
     textAlign: 'center',
     width: '100%'

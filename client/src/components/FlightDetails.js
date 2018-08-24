@@ -144,10 +144,10 @@ export class FlightDetails extends Component {
           </h2>
           <div id="fd-mins-before">
             <p>
-              To arrive {Math.floor(extraTime / 60)} minutes before departure with a
+              To arrive {Math.floor(extraTime / 60)} minutes before departure
             </p>
             <p>
-              {Math.ceil(duration / 60)} minute drive to the airport.
+              with a {Math.ceil(duration / 60)} minute drive to the airport.
             </p>
           </div>
           <div className="slider-container">

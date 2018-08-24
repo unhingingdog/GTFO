@@ -243,6 +243,9 @@ input[type="text"] {
   #fd-mins-before {
     margin-top: -5px;
     font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+    width: 100%;
+    line-height: 2px;
   }
 
   #fd-flight-details {

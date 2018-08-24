@@ -136,14 +136,9 @@ export class FlightDetails extends Component {
     return(
       <div id="flight-details-container">
         <section id="fd-details-and-slider">
-          <div id="fd-flight-details">
-            <p>
-              {`${(originCity || 'originCity')} to ${destinationCity || 'destinationCity'} on ${' ' + date}`}
-            </p>
-            <p>
-              {flight || 'EG123'}
-            </p>
-          </div>
+          <p id="fd-flight-details">
+            {`${(originCity || 'originCity')} to ${destinationCity || 'destinationCity'} on ${' ' + date} (${flight || 'EG123'})`}
+          </p>
           <h2 id="fd-leave-at">
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}
           </h2>

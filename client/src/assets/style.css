@@ -131,15 +131,6 @@ input[type="text"] {
 
 /* FlightDetails */
 
-#flight-details-container {
-  background-color: #d80404;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Oxygen', sans-serif;
-  align-items: center;
-}
-
 #fd-details-and-slider {
   display: flex;
   flex-direction: column;
@@ -220,6 +211,7 @@ input[type="text"] {
     padding-top: 100px;
     padding-bottom: 100px;
     padding: 70px 10px 120px 10px;
+    text-overflow: ellipsis;
   }
 
   #fd-details-and-slider > p {

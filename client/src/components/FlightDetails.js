@@ -111,8 +111,8 @@ export class FlightDetails extends Component {
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}
           </h2>
           <p style={styles.tripDetails}>
-              To arrive {Math.floor(extraTime / 60)} minutes before departure
-              with a {Math.ceil(duration / 60)} minute drive to the airport.
+              To arrive {55} minutes before departure
+              with a {45} minute drive to the airport.
           </p>
           <div style={styles.sliderContainer}>
             <Slider

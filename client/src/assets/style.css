@@ -225,6 +225,7 @@ input[type="text"] {
   #fd-details-and-slider > p {
     font-size: 16px;
     text-align: center;
+    text-overflow: ellipsis;
   }
 
   #fd-leave-at {
@@ -232,6 +233,7 @@ input[type="text"] {
     font-size: 42px;
     font-family: 'Do Hyeon', sans-serif;
     text-align: center;
+    text-overflow: ellipsis;
   }
 
   #fd-mins-before {

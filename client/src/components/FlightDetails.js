@@ -265,7 +265,7 @@ const mobileStyles = {
   tripDetails: {
     display: 'flex',
     justifyContent: 'center',
-    fontFamily: 'Do Hyeon, sans-serif',
+    fontFamily: 'sans-serif',
     textAlign: 'center',
     width: '100%'
   },

@@ -225,8 +225,7 @@ input[type="text"] {
   #fd-details-and-slider > p {
     font-size: 16px;
     text-align: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    text-overflow: clip;
   }
 
   #fd-leave-at {

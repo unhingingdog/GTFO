@@ -140,10 +140,6 @@ input[type="text"] {
 }
 
 #fd-details-and-slider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding-top: 100px;
   padding-bottom: 100px;
   font-family: 'Oxygen', sans-serif;

@@ -3,10 +3,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 const { DrawingManager } = require("react-google-maps/lib/components/drawing/DrawingManager");
 
 class Map extends Component {
-
   render() {
-    console.log(this.props)
-
     return(
       <GoogleMap
         defaultZoom={16}
@@ -15,7 +12,6 @@ class Map extends Component {
           lng: this.props.userLocation[1] || 0
         }}
       >
-        
       </GoogleMap>
     )
   }

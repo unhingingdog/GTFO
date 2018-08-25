@@ -105,7 +105,7 @@ export class FlightDetails extends Component {
       <div style={styles.container}>
         <section style={styles.topContainer}>
           <p>
-            {(originCity || 'originCity')} to {destinationCity || 'destinationCity'} on {flightDate}
+            {(originCity || 'origin City')} to {destinationCity || 'destination City'} on {flightDate} ({flight || 'EG123'})
           </p>
           <h2 style={styles.leaveAt}>
             {`Leave at ${leaveAt.split(' ')[0].split(':').splice(0,2).join(':')}`}

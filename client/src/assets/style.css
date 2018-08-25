@@ -129,63 +129,6 @@ input[type="text"] {
   padding: 30px;
 }
 
-/* FlightDetails */
-
-#flight-details-container {
-  background-color: #d80404;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#fd-details-and-slider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  font-family: 'Oxygen', sans-serif;
-}
-
-#fd-details-and-slider > p {
-  font-size: 20px;
-}
-
-#fd-leave-at {
-  margin-top: 0px;
-  font-size: 80px;
-  line-height: 0px;
-  font-family: 'Do Hyeon', sans-serif;
-  background-color: blue;
-  width: 100%;
-}
-
-#fd-leave-at > p {
-  display: inline;
-}
-
-#fd-mins-before {
-  margin-top: -5px;
-  font-family: 'Do Hyeon', sans-serif;
-}
-
-#fd-flight-details {
-  line-height: 0px;
-  padding-bottom: 50px;
-  font-family: 'Do Hyeon', sans-serif;
-}
-
-.slider-container {
-  width: 85vw;
-  padding: 40px 0 40px 0;
-}
-
-#fd-map {
-  width: 100vw;
-}
-
 
 @media only screen and (max-width: 600px) {
   #container {
@@ -202,7 +145,7 @@ input[type="text"] {
   }
 
   .flight-input-message {
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Londrina Solid', sans-serif;
     color: #feffea;
     font-size: 20px;
     position: absolute;
@@ -214,64 +157,5 @@ input[type="text"] {
     width: 100px;
     height: 100px;
     color: #feffea;
-  }
-
-  /* FlightDetails */
-
-  #fd-details-and-slider {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    padding: 70px 10px 120px 10px;
-  }
-
-  #fd-details-and-slider > p {
-    font-size: 16px;
-    text-align: center;
-    text-overflow: clip;
-  }
-
-  #fd-leave-at {
-    margin-top: 0px;
-    font-size: 42px;
-    font-family: 'Do Hyeon', sans-serif;
-    text-align: center;
-    text-overflow: ellipsis;
-    background-color: blue;
-    width: 100%;
-  }
-
-  #fd-mins-before {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -5px;
-    font-family: 'Do Hyeon', sans-serif;
-    text-align: center;
-    width: 100%;
-    line-height: 2px;
-  }
-
-  #fd-leave-at > p {
-    display: block;
-  }
-
-  #fd-flight-details {
-    line-height: 0px;
-    padding-bottom: 50px;
-    font-family: 'Do Hyeon', sans-serif;
-  }
-
-  .slider-container {
-    width: 85vw;
-    padding: 40px 0 40px 0;
-  }
-
-  #fd-map {
-    height: 100vw;
-    width: 100vw;
   }
 }

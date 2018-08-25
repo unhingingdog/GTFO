@@ -267,7 +267,8 @@ const mobileStyles = {
     justifyContent: 'center',
     fontFamily: 'Londrina Solid, sans-serif',
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
+    marginTop: -18
   },
   flightSummary: {
     padding: '-20px 0 50px 0',
@@ -279,7 +280,6 @@ const mobileStyles = {
     fontFamily: 'Londrina Solid, sans-serif'
   },
   mapContainer: {
-    height: '100vw',
     width: '100vw'
   },
   topLabel: {

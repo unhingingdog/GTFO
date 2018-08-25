@@ -257,7 +257,7 @@ const mobileStyles = {
   leaveAt: {
     marginTop: '0px',
     fontSize: '42px',
-    fontFamily: 'Do Hyeon',
+    fontFamily: 'Londrina Solid, sans-serif',
     textAlign: 'center',
     textOverflow: 'ellipsis',
     width: '100%'
@@ -265,13 +265,13 @@ const mobileStyles = {
   tripDetails: {
     display: 'flex',
     justifyContent: 'center',
-    fontFamily: 'Squada One cursivesans-serif',
+    fontFamily: 'Londrina Solid, sans-serif',
     textAlign: 'center',
     width: '100%'
   },
   flightSummary: {
     padding: '-20px 0 50px 0',
-    fontFamily: 'Squada One cursivesans-serif'
+    fontFamily: 'Londrina Solid, sans-serif'
   },
   sliderContainer: {
     width: '85vw',

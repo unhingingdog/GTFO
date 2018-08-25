@@ -276,7 +276,7 @@ const mobileStyles = {
   sliderContainer: {
     width: '85vw',
     padding: '40px 0 40px 0',
-    fontFamily: 'Oxygen, sans-serif'
+    fontFamily: 'Londrina Solid, sans-serif'
   },
   mapContainer: {
     height: '100vw',

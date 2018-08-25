@@ -42,7 +42,7 @@ body {
 }
 
 input[type="text"] {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Londrina Solid', 'sans-serif';
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -107,7 +107,7 @@ input[type="text"] {
 }
 
 .flight-input-message {
-  font-family: 'Do Hyeon', sans-serif;
+  font-family: 'Londrina Solid', 'sans-serif';
   color: #feffea;
   font-size: 30px;
   position: absolute;

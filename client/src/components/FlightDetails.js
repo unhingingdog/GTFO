@@ -104,7 +104,7 @@ export class FlightDetails extends Component {
     return(
       <div style={styles.container}>
         <section style={styles.topContainer}>
-          <p id="fd-flight-details">
+          <p>
             {(originCity || 'originCity')} to {destinationCity || 'destinationCity'} on {flightDate}
           </p>
           <h2 style={styles.leaveAt}>

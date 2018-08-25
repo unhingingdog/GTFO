@@ -104,7 +104,7 @@ export class FlightDetails extends Component {
     return(
       <div style={styles.container}>
         <section style={styles.topContainer}>
-          <p>
+          <p style={styles.flightSummary}>
             {(originCity || 'origin City')} to {destinationCity || 'destination City'} on {flightDate} ({flight || 'EG123'})
           </p>
           <h2 style={styles.leaveAt}>
@@ -265,13 +265,13 @@ const mobileStyles = {
   tripDetails: {
     display: 'flex',
     justifyContent: 'center',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Squada One cursivesans-serif',
     textAlign: 'center',
     width: '100%'
   },
   flightSummary: {
-    paddingBottom: '50px',
-    fontFamily: 'sans-serif'
+    padding: '-20px 0 50px 0',
+    fontFamily: 'Squada One cursivesans-serif'
   },
   sliderContainer: {
     width: '85vw',

@@ -4,7 +4,6 @@ import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import Map from './Map'
 
-console.log(process.env.REACT_APP_GOOGLE_API_KEY)
 
 export class FlightDetails extends Component {
   constructor(props) {
@@ -21,6 +20,8 @@ export class FlightDetails extends Component {
   }
 
   render() {
+    console.log(process.env)
+
     const {
       flight,
       originCity,
@@ -132,7 +133,7 @@ export class FlightDetails extends Component {
         <section style={styles.mapContainer}>
           <Map
             isMarkerShown
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.googleKey}&v=3.exp&libraries=geometry,drawing,places`}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfk4YRRRYLi3FMIgm-akdKcWRUt_q5I6Y&v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}

@@ -39,14 +39,8 @@ const getDistance = async (origins, destinations) => {
     }
   )
     .asPromise()
-    .then(response => {
-      return response.json.rows[0].elements
-      // return response.json.rows[0].elements[0].distance.value
-    })
-    .catch((err) => {
-      console.log(err)
-      return err
-    });
+    .then(response => response.json.rows[0].elements)
+    .catch(err => err)
 }
 
 const getDirections = async (origin, destination) => {

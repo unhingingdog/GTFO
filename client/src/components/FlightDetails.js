@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import Map from './Map'
+import mapsKey from '../mapsKey'
 
 
 export class FlightDetails extends Component {
@@ -20,8 +21,6 @@ export class FlightDetails extends Component {
   }
 
   render() {
-    console.log(process.env)
-
     const {
       flight,
       originCity,
@@ -133,11 +132,12 @@ export class FlightDetails extends Component {
         <section style={styles.mapContainer}>
           <Map
             isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfk4YRRRYLi3FMIgm-akdKcWRUt_q5I6Y&v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${mapsKey}&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             userLocation={[this.props.currentLatitude, this.props.currentLongitude]}
+            airportName={this.props.airportName}
           />
         </section>
       </div>
@@ -150,6 +150,7 @@ const mapStateToProps = state => {
     flight: state.flight.flight,
     originCity: state.flight.originCity,
     destinationCity: state.flight.destinationCity,
+    airportName: state.flight.origin,
     departure: state.flight.filedDepartureTime,
     actualDepartureTime: state.flight.actualdeparturetime,
     arriveAtGate: state.flight.arriveAtGate,
@@ -189,8 +190,8 @@ const desktopStyles = {
   },
   leaveAt: {
     marginTop: '0px',
-    fontSize: '42px',
-    fontFamily: 'Do Hyeon',
+    fontSize: '70px',
+    fontFamily: 'Londrina Solid, sans-serif',
     textAlign: 'center',
     textOverflow: 'ellipsis',
     width: '100%'
@@ -200,18 +201,19 @@ const desktopStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '-5px',
-    fontFamily: 'Do Hyeon, sans-serif',
+    fontFamily: 'Londrina Solid, sans-serif',
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
+    fontSize: '30px'
   },
   flightSummary: {
-    paddingBottom: '50px',
-    fontFamily: 'sans-serif'
+    fontFamily: 'Londrina Solid, sans-serif',
+    fontSize: '30px'
   },
   sliderContainer: {
     width: '85vw',
     padding: '40px 0 40px 0',
-    fontFamily: 'Oxygen, sans-serif'
+    fontFamily: 'Londrina Solid, sans-serif'
   },
   mapContainer: {
     width: '100vw'
@@ -317,6 +319,3 @@ const mobileStyles = {
     top: -5
   }
 }
-
-// To arrive {Math.floor(extraTime / 60)} minutes before departure
-// with a {Math.ceil(duration / 60)} minute drive to the airport.

@@ -1,47 +1,59 @@
+/*global google*/
 import React, { Component } from 'react'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Polyline,
+  Marker,
+  DirectionsRenderer
+} from "react-google-maps"
 const { DrawingManager } = require("react-google-maps/lib/components/drawing/DrawingManager");
 
 class Map extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      directions: null
+    }
+  }
+
+  componentDidMount() {
+    const { userLocation } = this.props
+    const DirectionsService = new google.maps.DirectionsService
+
+    DirectionsService.route({
+        origin: new google.maps.LatLng(userLocation[0], userLocation[1]),
+        destination: this.props.airportName + 'airport',
+        travelMode: google.maps.TravelMode.DRIVING,
+      }, (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          this.setState({
+            directions: result,
+          });
+        } else {
+          console.error(`error fetching directions ${result}`);
+        }
+      })
+  }
+
   render() {
+    const { userLocation } = this.props
     return(
       <GoogleMap
         defaultZoom={16}
         defaultCenter={{
-          lat: this.props.userLocation[0] || 0,
-          lng: this.props.userLocation[1] || 0
+          lat: userLocation[0] || 0,
+          lng: userLocation[1] || 0
         }}
       >
+      {this.state.directions &&
+        <DirectionsRenderer directions={this.state.directions} />
+      }
       </GoogleMap>
     )
   }
 }
 
-
 export default withScriptjs(withGoogleMap(Map))
-
-
-
-// <DrawingManager
-//   defaultDrawingMode={google.maps.drawing.OverlayType.CIRCLE}
-//   defaultOptions={{
-//     drawingControl: true,
-//     drawingControlOptions: {
-//       position: google.maps.ControlPosition.TOP_CENTER,
-//       drawingModes: [
-//         google.maps.drawing.OverlayType.CIRCLE,
-//         google.maps.drawing.OverlayType.POLYGON,
-//         google.maps.drawing.OverlayType.POLYLINE,
-//         google.maps.drawing.OverlayType.RECTANGLE,
-//       ],
-//     },
-//     circleOptions: {
-//       fillColor: `#ffff00`,
-//       fillOpacity: 1,
-//       strokeWeight: 5,
-//       clickable: false,
-//       editable: true,
-//       zIndex: 1,
-//     },
-//   }}
-// />

@@ -5,7 +5,7 @@ export default () => {
   return(
     <div id="no-location-container">
       <h1>
-        I promise I won't sell you location to Dog the Bounty Hunter.
+        Enable browser location to use.
       </h1>
     </div>
   )

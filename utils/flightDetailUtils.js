@@ -89,8 +89,10 @@ const getNearestFlights = flights => {
   const output = []
 
   flights.forEach(flight => {
+    let distanceToAirport
     try {
-      const { value: distanceToAirport } = flight.distance
+      const { value } = flight.distance
+      distanceToAirport = value
     } catch(error) {
       throw 'Could not find any flights matching that code.'
     }

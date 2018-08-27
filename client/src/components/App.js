@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import styles from '../assets/style.css'
 
 import FlightInput from './FlightInput'
 import FlightDetails from './FlightDetails'

@@ -85,6 +85,15 @@ const airlineArrivalTimes = {
       arriveAtGate: hour * 0.66,
       gateClosed: hour * 0.25
     }
+  },
+  SDA: {//Sounds Air
+    domestic: {
+      type: 'domestic',
+      checkInAndBagDropOpen: hour * 3,
+      checkInAndBagDropClose: hour * 0.75,
+      arriveAtGate: hour * 0.66,
+      gateClosed: hour * 0.25
+    }
   }
 }
 
@@ -99,6 +108,14 @@ const airportLocations = {
   NZAP: 'New Zealand',
   NZGS: 'New Zealand',
   NZNR: 'New Zealand',
+  NZTG: 'New Zealand',
+  NZNS: 'New Zealand',
+  NZNP: 'New Zealand',
+  NZRO: 'New Zealand',
+  NZQN: 'New Zealand',
+  NZWB: 'New Zealand', //Blenheim
+  NZPN: 'New Zealand', //Picton
+  NZTU: 'New Zealand', //Timaru
   SFO: 'United States',
   KSFO: 'United States', //san francisco
   KLAX: 'United States', //LA

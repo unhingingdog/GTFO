@@ -35,21 +35,18 @@ export class FlightDetails extends Component {
 
     const { extraTime } = this.state
 
-    const flightDate = new Date((departure) * 1000).toDateString().trim()
+    const flightDate = new Date((departure) * 1000).toDateString()
 
-    const departureTime = new Date((departure) * 1000).toTimeString().trim()
+    const departureTime = new Date((departure) * 1000).toTimeString()
 
     const arriveAtGateTime = new Date((departure - arriveAtGate) * 1000)
-      .toTimeString().trim()
+      .toTimeString()
 
     const checkinAndBaggageDropCloseTime =
-      new Date((departure - checkInAndBagDropClose) * 1000).toTimeString().trim()
-
-    const checkInAndBaggageOpenTime =
-      new Date((departure - checkInAndBagDropOpen) * 1000).toTimeString().trim()
+      new Date((departure - checkInAndBagDropClose) * 1000).toTimeString()
 
     const gateCloseTime = new Date((departure - gateClosed) * 1000)
-      .toTimeString().trim()
+      .toTimeString()
 
     const leaveAt =
       new Date((

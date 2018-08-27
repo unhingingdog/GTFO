@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'universal-cookie'
 import { isMobile } from "react-device-detect";
-import Loading from './Loading'
 import Input from './Input'
 import PlaneButton from './PlaneButton'
 import {
@@ -72,7 +71,6 @@ export class FlightInput extends Component {
   submitFlightCode = async () => {
     const {
       submitFlight,
-      departure,
       startLoading,
       stopLoading,
       flightError,

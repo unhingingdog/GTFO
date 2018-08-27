@@ -4,11 +4,8 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Polyline,
-  Marker,
   DirectionsRenderer
 } from "react-google-maps"
-const { DrawingManager } = require("react-google-maps/lib/components/drawing/DrawingManager");
 
 class Map extends Component {
   constructor(props) {
@@ -21,7 +18,7 @@ class Map extends Component {
 
   componentDidMount() {
     const { userLocation } = this.props
-    const DirectionsService = new google.maps.DirectionsService
+    const DirectionsService = new google.maps.DirectionsService()
 
     DirectionsService.route({
         origin: new google.maps.LatLng(userLocation[0], userLocation[1]),

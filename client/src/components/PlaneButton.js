@@ -19,7 +19,7 @@ export default class PlaneButton extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { formContent, error } = this.props
-    const { showPlane, submitting, showError } = this.state
+    const { showPlane, submitting } = this.state
 
     if (!showPlane && !submitting && formContent.length >= 5)
       this.setState({ showPlane: true })

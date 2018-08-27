@@ -1,5 +1,4 @@
 import React from 'react'
-import plane from '../assets/airplane-shape.svg'
 
 export default () => {
   return(

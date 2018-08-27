@@ -96,6 +96,13 @@ const airportLocations = {
   NZCH: 'New Zealand',
   NZWN: 'New Zealand',
   AKL: 'New Zealand',
+  NZAA: 'New Zealand',
+  NZHN: 'New Zealand',
+  NZDN: 'New Zealand',
+  NZNV: 'New Zealand',
+  NZAP: 'New Zealand',
+  NZGS: 'New Zealand',
+  NZNR: 'New Zealand',
   SFO: 'United States'
 }
 

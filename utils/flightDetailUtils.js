@@ -18,7 +18,7 @@ const findAirlineArrivalTimes = (tailNumber, international) => {
     return airlineArrivalTimes[airline].international
 
   if (airlineArrivalTimes[airline]) return airlineArrivalTimes[airline].domestic
-  throw 'Could not find airline arrival time details.'
+  throw 'Could not find airline.'
 }
 
 
@@ -89,7 +89,12 @@ const getNearestFlights = flights => {
   const output = []
 
   flights.forEach(flight => {
-    const { value: distanceToAirport } = flight.distance
+    try {
+      const { value: distanceToAirport } = flight.distance
+    } catch(error) {
+      throw 'Could not find any flights matching that code.'
+    }
+
     if (distanceToAirport < minimumDistance) {
       //account for large airport or user is close to airport
       minimumDistance = distanceToAirport * 1.5
@@ -127,7 +132,6 @@ const getFlights = async (
       )
     )
   } catch (e) {
-    console.log(`Could not get flight data: ${e}`)
     return [{ error: `Could not get flight data: ${e}` }]
   }
 }

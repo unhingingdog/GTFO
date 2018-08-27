@@ -44,7 +44,7 @@ export default class PlaneButton extends Component {
       <div id="button">
         <h2 className="flight-input-message">
           {
-            showError ? error :
+            showError ? error.split(':').slice(-1).pop() :
               loadingMessage ? loadingMessage :
                 (!showError && !loadingMessage && !showPlane && !formContent) ?
                   'Enter your flight number' : ''

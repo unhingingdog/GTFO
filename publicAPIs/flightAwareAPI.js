@@ -8,15 +8,7 @@ const auth = {
   password: password
 }
 
-const queryFlightInfo = async (tailNumber, resultCount, test = false) => {
-  if (test) {
-    let fakeData = new Promise((resolve, reject) => {
-      setTimeout(() => resolve(testFlightInfo), 0)
-    })
-    const result = await fakeData
-    return result
-  }
-
+const queryFlightInfo = async (tailNumber, resultCount) => {
   const url = 'http://flightxml.flightaware.com/json/FlightXML2/' + 'FlightInfoEx'
     const options = {
       url: url,
@@ -31,7 +23,7 @@ const queryFlightInfo = async (tailNumber, resultCount, test = false) => {
     if (result.data.FlightInfoExResult.flights) {
       return result.data.FlightInfoExResult.flights
     } else {
-      return 'could_not_find_flight'
+      throw 'Could not find any flights'
     }
 }
 
